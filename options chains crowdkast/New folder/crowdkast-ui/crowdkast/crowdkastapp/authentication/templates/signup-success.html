@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+<style type="text/css">
+    header {    
+    background-image: url(signup-success.jpg);    
+}
+</style>
+<section>
+<div class="row">
+    <div class="col-sm-3">
+    </div>
+    <div class="col-sm-6 well" style="background-color: rgb(255,255,255);">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="alert alert-success"><strong>Congratulations!</strong><p> You've been signed up. Click Sign In below to began completing your LinkedUp profile.</p> </div>
+                    <p><a class="btn btn-lg btn-primary btn-success"  href="{{ url_for('authentication.AuthenticationView:signin') }}">Sign In</a></p>
+                </div> 
+            </div>
+        </div><!--/container-->
+    </div>                   
+    <div class="col-sm-3">        
+    </div>
+</div>
+</section>
+{% endblock %}

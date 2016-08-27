@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html>
+    <head>
+
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>Crowdkast</title>
+<!-- Mainly scripts -->
+        <script src="js/jquery-2.1.1.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+
+        <script src="js/plugins/nouslider/jquery.nouislider.min.js"></script>
+        <!-- FooTable -->
+        <script src="js/plugins/footable/footable.all.min.js"></script>
+
+        <script src="js/plugins/datapicker/bootstrap-datepicker.js"></script>
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="font-awesome/css/font-awesome.css" rel="stylesheet">
+        <link href="css/plugins/footable/footable.core.css" rel="stylesheet">
+        <link href="css/plugins/datapicker/bootstrap-datepicker3.css" rel="stylesheet">
+        <link href="css/plugins/nouslider/jquery.nouislider.css" rel="stylesheet">
+        <link href="css/style.css" rel="stylesheet">
+        <script>
+        $(function () {
+              $('[data-toggle="tooltip"]').tooltip()
+            })
+
+        </script>
+        <style>
+        .modal.fade {
+            width: 90%; /* desired relative width */
+          left: 5%; /* (100%-width)/2 */
+          /* place center */
+          margin-left:auto;
+          margin-right:auto; 
+        }
+    </style>
+    </head>
+
+    <body>
+
+        <div id="wrapper">
+
+            <nav class="navbar-default navbar-static-side" role="navigation">
+                <div class="sidebar-collapse">
+                    <ul class="nav metismenu" id="side-menu">
+                        <li class="nav-header logo-head">
+                            <div class="dropdown profile-element">
+                                <span><h4>CROWDKAST</h4></span>
+                            </div>
+                        </li>
+                        <li><a href="#"><i class="fa fa-suitcase"></i> <span class="nav-label">Portfolio</span></a></li>
+                        <li><a href="#"><i class="fa fa-eye"></i> <span class="nav-label">Watchlist</span></a></li>
+                        <li><a href="#"><i class="fa fa-clock-o"></i> <span class="nav-label">History</span></a></li>
+                        <li><a href="#"><i class="fa fa-cog"></i> <span class="nav-label">Option Chain</span></a></li>
+                        <li><a href="#"><i class="fa fa-file-text-o"></i> <span class="nav-label">Logs</span></a></li>
+                    </ul>
+
+                </div>
+            </nav>
+
+            <div id="page-wrapper" class="gray-bg">
+                <div class="row wrapper border-bottom white-bg page-heading">
+                    <div class="col-lg-10 col-md-10 col-sm-10 top-bar">
+                        <ol class="menu">
+                            <li><a href="index-2.html">About</a></li>
+                            <li><a href="index-2.html">Data</a></li>
+                            <li><a href="index-2.html">Liscencing</a></li>
+                        </ol>
+                    </div>
+                    <div class="col-lg-2 col-md-2 col-sm-2  top-bar">
+                        <img src="img/a4.jpg" width="50" height="50" class="img-circle"/>
+                        <div class="dropdown profile-element codekast"> 
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+                                <span class="clear">  <span class="text-muted text-xs block codekast">John Smith <b class="caret"></b></span> </span> </a>
+                            <ul class="dropdown-menu animated fadeInRight m-t-xs">
+                                <li><a href="profile.html">Profile</a></li>
+                                <li><a href="contacts.html">Contacts</a></li>
+                                <li><a href="mailbox.html">Mailbox</a></li>
+                                <li class="divider"></li>
+                                <li><a href="login.html">Logout</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="wrapper wrapper-content animated fadeInRight">
+                    
+                    
+
+                    <div class="row">
+                        
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="ibox float-e-margins codekast">
+
+                                <table class="footable table table-stripped toggle-arrow-tiny codekast" data-page-size="8">
+                                    <thead class="codekast">
+                                        <tr>
+                                            <th>Stock</th>
+                                            <th>Price</th>
+                                            <th>Type</th>
+                                            <th>Strike</th>
+                                            <th>Expiry</th>   
+                                            <th>Implied Volatity</th>
+                                            <th>Crowdkast Volatility</th>
+                                            <th>Ratio&nbsp;<a data-toggle="tooltip" data-placement="top" title="This ratio is....">?</a></th>
+                                            <th>Option Chain</th>
+                                            <th>Expected Price on 18-Mar-2016</th>                    
+                                            
+                                      
+                                        </tr>
+                                    </thead>
+                                    <tbody class="codekast">
+                                        <tr>
+                                           
+                                           <th>MSFT</th>
+                                            <th>51.3</th>
+                                            <th>Put</th>
+                                            <th>50</th>
+                                            <th>18-Mar-16</th>   
+                                            <th>80%</th>
+                                            <th>25%</th>
+                                            <th>3.20</th>
+                                            <th><button type="button"  class="btn btn-default btn-md" style="display: block; width: 100%;" data-toggle="modal" data-target="#myModal">All MSFT Put's March</button></th>
+                                            <th>54.5</th>  
+                                           
+                                           
+                                        </tr>
+
+                                        <tr>
+                                           
+                                            <th>GOOG</th>
+                                            <th>705.07</th>
+                                            <th>Call</th>
+                                            <th>790</th>
+                                            <th>18-Mar-16</th>   
+                                            <th>75%</th>
+                                            <th>32%</th>
+                                            <th>2.34</th>
+                                            <th><button type="button"  class="btn btn-default btn-md" style="display: block; width: 100%;" data-toggle="modal" data-target="#myModal1">All GOOG Call's March</button></th>
+                                            <th>725.75</th>  
+                                           
+                                           
+                                        </tr>
+
+                                        <tr>
+                                           
+                                            <th>AAPL</th>
+                                            <th>96.91</th>
+                                            <th>Call</th>
+                                            <th>105</th>
+                                            <th>18-Mar-16</th>   
+                                            <th>45%</th>
+                                            <th>23%</th>
+                                            <th>1.96</th>
+                                            <th><button type="button"  class="btn btn-default btn-md" style="display: block; width: 100%;" data-toggle="modal" data-target="#myModal2">All AAPL Call's March</button></th>
+                                            <th>97.25</th>  
+                                           
+                                           
+                                        </tr>
+                                        
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+        <!-- Modal -->
+          <div class="modal fade" id="myModal" role="dialog">
+            <div class="modal-dialog">
+            
+              <!-- Modal content-->
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="modal-title">MSFT  || 51.3  ||   March ||  19-Mar-16</h4>
+                </div>
+                <div class="modal-body">
+                                <table class="footable table table-stripped toggle-arrow-tiny codekast" data-page-size="8">
+                                    <thead class="codekast">
+                                        <tr>
+                                            <th>Puts</th>
+                                            <th>Price</th>
+                                            <th>Imp Vol</th>
+                                            <th>CKV Vol</th>
+                                            <th>Ratio</th>                                                                                       
+                                        </tr>
+                                    </thead>
+                                    <tbody class="codekast">
+                                        <tr><th bgcolor="#0000FF" style="color:white;">55</th>
+                                            <th>17.5</th>
+                                            <th>34%</th>
+                                            <th>45%</th>
+                                            <th>0.76</th>    
+                                        </tr>
+
+                                        <tr>
+                                           <th bgcolor="#0000F0" style="color:white;">54</th>
+                                            <th>12.5</th>
+                                            <th>36%</th>
+                                            <th>75%</th>
+                                            <th>0.48</th>    
+                                        </tr>
+
+                                        <tr><th bgcolor="#0000E0" style="color:white;">53</th>
+                                            <th>7.5</th>
+                                            <th>38%</th>
+                                            <th>70%</th>
+                                            <th>0.54</th> 
+                                        </tr>
+                                        <tr><th bgcolor="#0000D0" style="color:white;">52</th>
+                                            <th>2.5</th>
+                                            <th>40%</th>
+                                            <th>69%</th>
+                                            <th>0.58</th>   
+                                        </tr>
+                                        <tr><th bgcolor="#0000C0" style="color:white;">51</th>
+                                            <th>1</th>
+                                            <th>45%</th>
+                                            <th>65%</th>
+                                            <th>0.69</th>   
+                                        </tr>
+                                        
+                                    </tbody>
+                                </table>
+                            
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+              
+            </div>
+          </div>
+
+          <div class="modal fade" id="myModal1" role="dialog">
+            <div class="modal-dialog">
+            
+              <!-- Modal content-->
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="modal-title">GOOG  || 96.91  ||  March  ||  19-Mar-16</h4>
+                </div>
+                <div class="modal-body">
+                  <table class="footable table table-stripped toggle-arrow-tiny codekast" data-page-size="8">
+                                    <thead class="codekast">
+                                        <tr>
+                                            <th>Calls</th>
+                                            <th>Price</th>
+                                            <th>Imp Vol</th>
+                                            <th>CKV Vol</th>
+                                            <th>Ratio</th>                                                                                       
+                                        </tr>
+                                    </thead>
+                                    <tbody class="codekast">
+                                        <tr><th bgcolor="#FF0000" style="color:white;">100</th>
+                                            <th>1.5</th>
+                                            <th>72%</th>
+                                            <th>15%</th>
+                                            <th>4.80</th>    
+                                        </tr>
+
+                                        <tr>
+                                           <th bgcolor="#F00000" style="color:white;">95</th>
+                                            <th>3.5</th>
+                                            <th>65%</th>
+                                            <th>17%</th>
+                                            <th>3.82</th>  
+                                        </tr>
+
+                                        <tr><th bgcolor="#E00000" style="color:white;">90</th>
+                                            <th>5.5</th>
+                                            <th>60%</th>
+                                            <th>25%</th>
+                                            <th>2.40</th> 
+                                        </tr>
+                                        <tr><th bgcolor="#D00000" style="color:white;">85</th>
+                                            <th>10.5</th>
+                                            <th>52%</th>
+                                            <th>26%</th>
+                                            <th>2.00</th>   
+                                        </tr>
+                                        <tr><th bgcolor="#C00000" style="color:white;">80</th>
+                                            <th>15.5</th>
+                                            <th>45%</th>
+                                            <th>27%</th>
+                                            <th>1.67</th>   
+                                        </tr>
+                                        
+                                    </tbody>
+                                </table>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+              
+            </div>
+          </div>
+
+          <div class="modal fade" id="myModal2" role="dialog">
+            <div class="modal-dialog">
+            
+              <!-- Modal content-->
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="modal-title">AAPL || 96.91  ||  March  || 19-Mar-16</h4>
+                </div>
+                <div class="modal-body">
+                  <table class="footable table table-stripped toggle-arrow-tiny codekast" data-page-size="8">
+                                    <thead class="codekast">
+                                        <tr>
+                                            <th>Puts</th>
+                                            <th>Price</th>
+                                            <th>Imp Vol</th>
+                                            <th>CKV Vol</th>
+                                            <th>Ratio</th>                                                                                       
+                                        </tr>
+                                    </thead>
+                                    <tbody class="codekast">
+                                        <tr><th bgcolor="#0000FF" style="color:white;">55</th>
+                                            <th>17.5</th>
+                                            <th>34%</th>
+                                            <th>45%</th>
+                                            <th>0.76</th>    
+                                        </tr>
+
+                                        <tr>
+                                           <th bgcolor="#0000F0" style="color:white;">54</th>
+                                            <th>12.5</th>
+                                            <th>36%</th>
+                                            <th>75%</th>
+                                            <th>0.48</th>    
+                                        </tr>
+
+                                        <tr><th bgcolor="#0000E0" style="color:white;">53</th>
+                                            <th>7.5</th>
+                                            <th>38%</th>
+                                            <th>70%</th>
+                                            <th>0.54</th> 
+                                        </tr>
+                                        <tr><th bgcolor="#0000D0" style="color:white;">52</th>
+                                            <th>2.5</th>
+                                            <th>40%</th>
+                                            <th>69%</th>
+                                            <th>0.58</th>   
+                                        </tr>
+                                        <tr><th bgcolor="#0000C0" style="color:white;">51</th>
+                                            <th>1</th>
+                                            <th>45%</th>
+                                            <th>65%</th>
+                                            <th>0.69</th>   
+                                        </tr>
+                                        
+                                    </tbody>
+                                </table>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+              
+            </div>
+          </div>
+        
+
+        <!-- Page-Level Scripts -->
+        <script>
+            $(document).ready(function () {
+                $('.footable').footable();
+                $('#date_1').datepicker({});
+                $("#basic_slider").noUiSlider({
+                    start: 40,
+                    behaviour: 'tap',
+                    connect: 'upper',
+                    range: {
+                        'min': 20,
+                        'max': 80
+                    }
+                });
+                $("#advance_slider").noUiSlider({
+                    start: 40,
+                    step: 10,
+                    range: {
+                        'min': 0,
+                        '20%': [300, 100],
+                        '50%': [800, 50],
+                        'max': 1000
+                    }
+                });
+                $("#advance_slider").noUiSlider.on('update', function (values, handle) {
+                    $("#slider_count").text(values[handle]);
+                });
+
+            });
+
+        </script>
+
+    </body>
+</html>

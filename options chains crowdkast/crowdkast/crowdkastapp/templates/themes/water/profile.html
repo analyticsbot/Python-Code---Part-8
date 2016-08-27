@@ -1,0 +1,1388 @@
+{% extends "base.html" %}
+
+{% block header %}
+<!--Only if the user is logged in and the user is viewing his/her own profile, show the edit options-->
+{% if session['signed'] and session['username'] == user.username %}
+<link href="/static/bootstrap3-editable/css/bootstrap-editable.css" rel="stylesheet"/>
+{% endif %}
+
+{% endblock %}
+
+{% block content %}
+<style>
+  .modal-header, h4, .close {
+      background-color: #5cb85c;
+      color:white !important;
+      text-align: center;
+      font-size: 30px;
+  }
+  .modal-footer {
+      background-color: #f9f9f9;
+  }
+  a.editable-click { border-bottom: none; }
+  
+ 
+ 
+ #modal-header-mit {
+   background: #F8F8F8;
+   border-top-left-radius: 5px;
+   border-top-right-radius: 5px;
+}
+ 
+  #modal-header-edx {
+   background: #fff;
+   border-top-left-radius: 5px;
+   border-top-right-radius: 5px;
+}
+
+  #modal-header-coursera {
+   background: #fff;
+   border-top-left-radius: 5px;
+   border-top-right-radius: 5px;
+}
+  
+  #modal-header-udacity {
+   background:#294860;
+   border-top-left-radius: 5px;
+   border-top-right-radius: 5px;
+}
+  </style>
+  
+<style type="text/css">
+    body.modal-open,
+    .modal-open .navbar-fixed-top
+    {
+        margin-right:0px;
+    }
+</style>
+
+<section>
+<div class="container">
+	<div class="row">
+		<div class="col-md-3">    
+			{% if session['signed'] and session['username']== user.username %}
+				<p><strong><a href="#" id="fullname" data-type="text" data-url="{{ url_for('account.AccountView:edit_fullname') }}" data-pk="{{user.id}}"  data-title="Change your fullname">{{ user.fname + user.lname }}</a></strong></p>
+				<p><a href="#" id="position" data-type="text" data-url="{{ url_for('account.AccountView:edit_position') }}" data-pk="{{user.id}}"  data-title="Change your current position">{{ user.position }}</a></p>
+				<p><a href="#" id="location" data-type="text" data-url="{{ url_for('account.AccountView:edit_location') }}" data-pk="{{user.id}}"  data-title="Change your location">{{ user.location }}</a></p>
+				<p><a href="javascript:uploadAvatar({{user.id}});"><img id="avatar" width="200" height = "200" class="img img-rounded" src="{{user.avatar}}"></a></p>				
+			
+				<div id="university">&nbsp;<p>{% for univ in user.universities %} <div class="row" id ="universityCount{{loop.index}}"><a data-name="{{univ.id}}" data-type="text" data-url="{{ url_for('account.AccountView:editEducation') }}" data-pk="{{user.id}}"  data-title="Add/Edit your education" class="editable editable-click">{{ univ.university }}</a></div>{% endfor %}</p></div>
+				<div class="row">
+					<div class="col-md-5">
+						<p><button class="btn btn-success btn-sm "	id="univ_btnadd" style="float: left;">Add University</button></p>
+					</div>
+					<div class="col-md-5">
+						<p><button class="btn btn-success btn-sm "	id="univ_btndel" style="float: left;">Remove</button></p>
+					</div>
+				</div>		
+			{% else %}
+				<p><strong>{{ user.fname + user.lname }}</strong></p>				
+				<p>{{ user.position }}</p>
+				<p>{{ user.location }}</p>
+				<p><img id="avatar" width="200" height = "200" class="img img-rounded" src="{{ user.avatar }}"></p>
+				<p>{% for univ in user.universities %} <div class="row">{{ univ.university }}</div>{% endfor %}</p>
+				
+			{% endif %}
+		</div>
+		<div class="col-md-9">
+			<div class="row">
+				<div class="panel panel-info">
+					<div class="panel-heading"><strong>Profiles</strong></div>
+						<div class="panel-body">
+							{% if session['signed'] and session['username'] == user.username %}
+							<div class="row">
+							  <div class="col-xs-6 col-md-3">
+								<a href="{{user.linkedin}}" id="linkedin" data-type="text" data-url="{{ url_for('account.AccountView:editLinkedin') }}" data-pk="{{user.id}}"  data-title="Change your Linkedin profile url" ><img id="linkedinlogo" width="200" height = "70" class="img img-rounded" src="/static/logos/linkedin.jpg" ></a>								
+							  </div>
+							  <div class="col-xs-6 col-md-3">
+								<a href="#" id="stackoverflow" data-type="text" data-url="{{ url_for('account.AccountView:editStackOverflow') }}" data-pk="{{user.id}}"  data-title="Change your Stackoverflow profile url"><img id="stackoverflowlogo" width="200" height = "70" class="img img-rounded" src="/static/logos/stackoverflow.jpg"></a>	
+							  </div>
+							  <div class="col-xs-6 col-md-3">
+								<a href="#" id="aboutme" data-type="text" data-url="{{ url_for('account.AccountView:editAboutMe') }}" data-pk="{{user.id}}"  data-title="Change your Aboutme profile url"><img id="aboutmelogo" width="200" height = "70" class="img img-rounded" src="/static/logos/aboutme.jpg"></a>
+							  </div>
+							  <div class="col-xs-6 col-md-3">
+								<a href="#" id="visualcv" data-type="text" data-url="{{ url_for('account.AccountView:editVisualCV') }}" data-pk="{{user.id}}"  data-title="Change your VisualCV profile url"><img id="visualcvlogo" width="200" height = "70" class="img img-rounded" src="/static/logos/visualcv.jpg"></a>
+							  </div>
+							</div>
+							<div class="row">&nbsp;</div>
+							<div class="row">
+							  <div class="col-xs-6 col-md-3">
+								<a href="#" id="facebook" data-type="text" data-url="{{ url_for('account.AccountView:editFacebook') }}" data-pk="{{user.id}}"  data-title="Change your Facebook profile url"><img id="facebooklogo" width="200" height = "70" class="img img-rounded" src="/static/logos/facebook.jpg"></a>
+							  </div>
+							  <div class="col-xs-6 col-md-3">
+								<a href="#" id="twitter" data-type="text" data-url="{{ url_for('account.AccountView:editTwitter') }}" data-pk="{{user.id}}"  data-title="Change your Twitter profile url"><img id="twitterlogo" width="200" height = "70" class="img img-rounded" src="/static/logos/twitter.jpg"></a>
+							  </div>
+							  <div class="col-xs-6 col-md-3">
+								<a href="#" id="quora" data-type="text" data-url="{{ url_for('account.AccountView:editQuora') }}" data-pk="{{user.id}}"  data-title="Change your Quora profile url"><img id="quoralogo" width="200" height = "70" class="img img-rounded" src="/static/logos/quora.jpg"></a>
+							  </div>
+							  <div class="col-xs-6 col-md-3">
+								<a href="#" id="github" data-type="text" data-url="{{ url_for('account.AccountView:editGithub') }}" data-pk="{{user.id}}"  data-title="Change your Github profile url"><img id="githublogo" width="200" height = "70" class="img img-rounded" src="/static/logos/github.jpg"></a>
+							  </div>
+							</div>
+							{% else %}
+							<div class="row">
+							  <div class="col-xs-6 col-md-3">
+								<a href="{{user.linkedin}}" target="_blank"><img id="linkedinlogo" width="200" height = "70" class="img img-rounded" src="/static/logos/linkedin.jpg"></a>
+							  </div>
+							  <div class="col-xs-6 col-md-3">
+								<a href="{{user.stackoverflow}}" target="_blank"><img id="stackoverflowlogo" width="200" height = "70" class="img img-rounded" src="/static/logos/stackoverflow.jpg"></a>	
+							  </div>
+							  <div class="col-xs-6 col-md-3">
+								<a href="{{user.aboutme}}" target="_blank"><img id="aboutmelogo" width="200" height = "70" class="img img-rounded" src="/static/logos/aboutme.jpg"></a>
+							  </div>
+							  <div class="col-xs-6 col-md-3">
+								<a href="{{user.visualcv}}" target="_blank"><img id="visualcvlogo" width="200" height = "70" class="img img-rounded" src="/static/logos/visualcv.jpg"></a>
+							  </div>
+							</div>
+							<div class="row">&nbsp;</div>
+							<div class="row">
+							  <div class="col-xs-6 col-md-3">
+								<a href="{{user.facebook}}" target="_blank"><img id="facebooklogo" width="200" height = "70" height = "70" class="img img-rounded" src="/static/logos/facebook.jpg"></a>
+							  </div>
+							  <div class="col-xs-6 col-md-3">
+								<a href="{{user.twitter}}" target="_blank"><img id="twitterlogo" width="200" height = "70" height = "70" class="img img-rounded" src="/static/logos/twitter.jpg"></a>
+							  </div>
+							  <div class="col-xs-6 col-md-3">
+								<a href="{{user.quora}}" target="_blank"><img id="quoralogo" width="200" height = "70" class="img img-rounded" src="/static/logos/quora.jpg"></a>
+							  </div>
+							  <div class="col-xs-6 col-md-3">
+								<a href="{{user.github}}" target="_blank"><img id="githublogo" width="200" height = "70" class="img img-rounded" src="/static/logos/github.jpg"></a>
+							  </div>
+							</div>
+							{% endif %}
+						</div>
+				</div>				
+			</div>
+			<div class="row">
+					<div class="panel panel-info">
+						<div class="panel-heading"><strong>Skills</strong></div>
+							<div class="panel-body">
+								{% if session['signed'] and session['username'] == user.username %}
+								
+									{% if user.skills|length == 0 %}
+										Let's add your skills!
+									<button class="btn btn-success btn-sm " data-toggle="modal" data-target="#skill_form" id="skillform_btnadd" style="float: right;">Add</button>
+									
+									{% elif user.skills|length != 0 %}	
+									{% for skillset in user.skills %}
+									<a href="javascript:editSkillform('{{skillset.id}}');"><span class="glyphicon glyphicon-edit"></span></a> 
+									<a href="javascript:deleteSkills('{{skillset.id}}');"><span class="glyphicon glyphicon-remove"></span></a>			
+										{% for skill_tag in skillset.skill.split(',') %}
+											<a href="#"><span class="badge badge-important pull-right">{{ skill_tag }}</span></a>
+										{% endfor %}
+									{% endfor %}
+									{% endif %}
+								{% else %}
+									{% if user.skills|length == 0 %}
+										No skills added!
+									{% elif user.skills|length != 0 %}
+										{% for skillset in user.skills %}
+										 {% for tag in skillset.skill.split(',') %}
+											<a href="#"><span class="badge badge-important pull-right">{{ tag }}</span></a>
+										{% endfor %}	
+										{% endfor %}	
+											
+									{% endif %}								
+								{% endif %}
+							</div>
+					</div>
+			</div>
+			<div class="row">
+				<div class="panel panel-info">
+					<div class="panel-heading"><strong>Online Courses</strong></div>
+						<div class="panel-body">
+							{% if session['signed'] and session['username']== user.username %}
+							<div class="row">
+							  <div class="col-xs-6 col-md-3">
+								<a href="javascript:({{user.id}});"> <img id="courseralogo" width="200" height = "70" class="img img-rounded" src="/static/logos/coursera.jpg" /></a>								
+							  </div>
+							  <div class="col-xs-6 col-md-3">
+								<a href="javascript:({{user.id}});"><img id="edxlogo" width="200" height = "50" class="img img-rounded" src="/static/logos/edx.jpg"></a>	
+							  </div>
+							  <div class="col-xs-6 col-md-3">
+								<a href="javascript:({{user.id}});"><img id="udacitylogo" width="200" height = "70" class="img img-rounded" src="/static/logos/udacity.jpg"></a>
+							  </div>
+							  <div class="col-xs-6 col-md-3">
+								<a href="javascript:({{user.id}});"><img id="mitlogo" width="200" height = "70" class="img img-rounded" src="/static/logos/mit.jpg"></a>
+							  </div>
+							</div>
+							
+							{% else %}
+							<div class="row">
+							  <div class="col-xs-6 col-md-3">
+								<img id="courseralogo" width="200" height = "70" class="img img-rounded" src="/static/logos/coursera.jpg">							
+							  </div>
+							  <div class="col-xs-6 col-md-3">
+								<img id="edxlogo" width="200" height = "50" class="img img-rounded" src="/static/logos/edx.jpg">	
+							  </div>
+							  <div class="col-xs-6 col-md-3">
+								<img id="udacitylogo" width="200" height = "70" class="img img-rounded" src="/static/logos/udacity.jpg">
+							  </div>
+							  <div class="col-xs-6 col-md-3">
+								<img id="mitlogo" width="200" height = "70" class="img img-rounded" src="/static/logos/mit.jpg">
+							  </div>
+							</div>							
+							
+							{% endif %}
+						</div>
+				</div>				
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<div class="modal fade" id="skill_form" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Add Skills</h4>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-1">&nbsp;
+                        </div>
+                        <div class="col-md-10">
+							
+                            <form class="form-horizontal" action="" method="POST" id="skillformid">
+									{{ skillform.skill_id }}
+									{{ skillform.hidden_tag() }}
+									
+                                <div class="form-group">
+									<div class="row">{{ skillform.skill.label }}</div>
+                                    <div class="row">
+									{{ skillform.skill(class="form-control", placeholder="Let's add some skills", **{'data-role':'tagsinput'})}}
+                                    </div>
+                                    <p class="help-block" id="error_tags">{{ skillform.skill.errors[0] }}</p>
+                                </div>
+                            </form>
+							
+                        </div>
+                        <div class="col-md-1">&nbsp;
+                        </div>
+                    </div>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary btn-success" id="skillform_btnsave">Save</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="avatar_form" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">Upload Photo</h4>
+      </div>
+      <div class="modal-body">
+          <form id="upload-file" method="post" enctype="multipart/form-data">
+              <input type="hidden" id="avatar_user_id" name="avatar_user_id"/>
+            <span class="btn btn-success fileinput-button">
+            <i class="glyphicon glyphicon-plus"></i>
+            <span>Add files</span>
+                <input name="file" type="file">
+            </span>
+            <button id="upload-file-btn" type="button" class="btn btn-primary">Upload</button>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <!-- Modal -->
+  <div class="modal" id="myModal" role="dialog">
+    <div class="modal-dialog">    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header" id="modal-header-coursera" style="padding:35px 50px;">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+		  <div class="row">
+			<div class="col-md-12" style="text-align:center">
+				<img src="/static/logos/coursera.jpg" alt="udacity" align="middle"/>
+			</div>
+		  </div>
+        </div>
+        <div class="modal-body" style="padding:40px 50px;" >		
+          <form role="form" action="" method="POST" id="courseraform">		  
+		  {{ addcourseraform.hidden_tag() }}
+		  {{addcourseraform.csrf_token}}		  
+		  {%if user.coursera|length==0%}
+			{% if session['signed'] and session['username']== user.username %}
+			<div id="nocourses">
+			Please add Coursera courses!
+			</div>				
+			<div class="form-group">
+			<!--{{ addcourseraform.courseracourses() }}-->
+			</div>
+			<div id="nocoursespresent">
+			 
+			</div>
+			
+<!--</form>-->			
+		  {%else%}		  
+			No courses has been added!		  
+		  {%endif%}
+		  {%endif%}
+		  <div id="coursespresent">
+		  {% for course in user.coursera %}
+		  <div class="panel panel-default" id="_courseracoursesid{{loop.index-1}}">
+			<div class="panel-body">
+		  <div class="form-group">				
+              <label for="courseracourses-{{loop.index-1}}-coursera_nm"><span class="glyphicon glyphicon-book"></span>Course name</label>
+			  <input id="courseracourses-{{loop.index-1}}-id" name="courseracourses-{{loop.index-1}}-id" type="hidden" value="{{course.id}}">
+			  <input id="courseracourses-{{loop.index-1}}-coursera_nm" name="courseracourses-{{loop.index-1}}-coursera_nm" type="text" value="{{course.coursera_name}}" class="form-control" {% if session['signed']==False or session['username']!= user.username %} readonly {%endif%}>
+			  <p class="help-block" id="error_tag_coursera_nm">{{ skillform.skill.errors[0] }}</p>
+			  <label for="courseracourses-{{loop.index-1}}-coursera_uri"><span class="glyphicon glyphicon-link"></span> Course url</label>
+			  <input id="courseracourses-{{loop.index-1}}-coursera_uri" name="courseracourses-{{loop.index-1}}-coursera_uri" type="text" value="{{course.coursera_url}}" class="form-control" {% if session['signed']==False or session['username']!= user.username %} readonly {%endif%}>
+			  <p class="help-block" id="error_tag_coursera_uri">{{ skillform.skill.errors[0] }}</p>
+          </div>
+		  </div>
+		  </div>
+		  {%endfor%}
+		  </div>	   
+</form>			  
+          <!--</form>-->
+        </div>
+		{% if session['signed'] and session['username']== user.username %}
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-danger btn-default pull-left" id ="courserabtnadd"> Add</button>	
+		  <button type="submit" class="btn btn-danger btn-default pull-left" id ="courserabtndel"> Delete</button>			  
+		  <button type="submit" class="btn btn-danger btn-default pull-right" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
+          <button type="submit" class="btn btn-danger btn-default pull-right" data-dismiss="modal" id ="courseraform_btnsave"> Save</button>
+		  
+        </div>
+		{%endif%}
+      </div>
+      
+    </div>
+  </div> 
+</div>
+
+
+<div class="container">
+  <!-- Modal -->
+  <div class="modal fade" id="myModalEDX" role="dialog">
+    <div class="modal-dialog">    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header" id="modal-header-edx" style="padding:35px 50px;">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+		  <div class="row">
+			<div class="col-md-12" style="text-align:center">
+				<img src="/static/logos/edx.jpg" alt="udacity" align="middle"/>
+			</div>
+		  </div>
+        </div>
+        <div class="modal-body" style="padding:40px 50px;" >		
+          <form role="form" action="" method="POST" id="edxform">		  
+		  {{ addedxform.hidden_tag() }}
+		  {{addedxform.csrf_token}}		  
+		  {%if user.edx|length==0%}
+			{% if session['signed'] and session['username']== user.username %}
+			<div id="noedxcourses">
+			Please add EDX courses!
+			</div>				
+			<div class="form-group">
+			<!--{{ addcourseraform.courseracourses() }}-->
+			</div>
+			<div id="noedxcoursespresent">
+			 
+			</div>
+			
+<!--</form>-->			
+		  {%else%}		  
+			No courses has been added!		  
+		  {%endif%}
+		  {%endif%}
+		  <div id="edxcoursespresent">
+		  {% for course in user.edx %}
+		  <div class="panel panel-default" id="_edxcoursesid{{loop.index-1}}">
+			<div class="panel-body">
+		  <div class="form-group">				
+              <label for="edxcourses-{{loop.index-1}}-edx_nm"><span class="glyphicon glyphicon-book"></span>Course name</label>
+			  <input id="edxcourses-{{loop.index-1}}-id" name="edxcourses-{{loop.index-1}}-id" type="hidden" value="{{course.id}}">
+			  <input id="edxcourses-{{loop.index-1}}-edx_nm" name="edxcourses-{{loop.index-1}}-edx_nm" type="text" value="{{course.edx_name}}" class="form-control" {% if session['signed']==False or session['username']!= user.username %} readonly {%endif%}>
+			  <p class="help-block" id="error_tag_coursera_nm">{{ skillform.skill.errors[0] }}</p>
+			  <label for="edxcourses-{{loop.index-1}}-edx_uri"><span class="glyphicon glyphicon-link"></span> Course url</label>
+			  <input id="edxcourses-{{loop.index-1}}-edx_uri" name="edxcourses-{{loop.index-1}}-edx_uri" type="text" value="{{course.edx_url}}" class="form-control" {% if session['signed']==False or session['username']!= user.username %} readonly {%endif%}>
+			  <p class="help-block" id="error_tag_coursera_uri">{{ skillform.skill.errors[0] }}</p>
+          </div>
+		  </div>
+		  </div>
+		  {%endfor%}
+		  </div>	   
+</form>			  
+          <!--</form>-->
+        </div>
+		{% if session['signed'] and session['username']== user.username %}
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-danger btn-default pull-left" id ="edxbtnadd"> Add</button>	
+		  <button type="submit" class="btn btn-danger btn-default pull-left" id ="edxbtndel"> Delete</button>			  
+		  <button type="submit" class="btn btn-danger btn-default pull-right" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
+          <button type="submit" class="btn btn-danger btn-default pull-right" data-dismiss="modal" id ="edxform_btnsave"> Save</button>
+		  
+        </div>
+		{%endif%}
+      </div>
+      
+    </div>
+  </div> 
+</div>
+
+
+<div class="container">
+  <!-- Modal -->
+  <div class="modal fade" id="myModalMIT" role="dialog">
+    <div class="modal-dialog">    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header" id="modal-header-mit" style="padding:35px 50px;">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+		  <div class="row">
+			<div class="col-md-12" style="text-align:center">
+				<img src="/static/logos/mit.jpg" alt="udacity" align="middle"/>
+			</div>
+		  </div>
+        </div>
+        <div class="modal-body" style="padding:40px 50px;" >		
+          <form role="form" action="" method="POST" id="mitform">		  
+		  {{ addmitform.hidden_tag() }}
+		  {{addmitform.csrf_token}}		  
+		  {%if user.mit|length==0%}
+			{% if session['signed'] and session['username']== user.username %}
+			<div id="nomitcourses">
+			Please add MIT courses!
+			</div>				
+			<div class="form-group">
+			<!--{{ addcourseraform.courseracourses() }}-->
+			</div>
+			<div id="nomitcoursespresent">
+			
+			</div>
+			
+<!--</form>-->			
+		  {%else%}		  
+			No courses has been added!		  
+		  {%endif%}
+		  {%endif%}
+		  <div id="mitcoursespresent">
+		  {% for course in user.mit %}
+		  <div class="panel panel-default" id="_mitcoursesid{{loop.index-1}}">
+			<div class="panel-body">
+		  <div class="form-group">				
+              <label for="mitcourses-{{loop.index-1}}-mit_nm"><span class="glyphicon glyphicon-book"></span>Course name</label>
+			  <input id="mitcourses-{{loop.index-1}}-id" name="mitcourses-{{loop.index-1}}-id" type="hidden" value="{{course.id}}">
+			  <input id="mitcourses-{{loop.index-1}}-mit_nm" name="mitcourses-{{loop.index-1}}-mit_nm" type="text" value="{{course.mit_name}}" class="form-control" {% if session['signed']==False or session['username']!= user.username %} readonly {%endif%}>
+			  <p class="help-block" id="error_tag_coursera_nm">{{ skillform.skill.errors[0] }}</p>
+			  <label for="mitcourses-{{loop.index-1}}-mit_uri"><span class="glyphicon glyphicon-link"></span> Course url</label>
+			  <input id="mitcourses-{{loop.index-1}}-mit_uri" name="mitcourses-{{loop.index-1}}-mit_uri" type="text" value="{{course.mit_url}}" class="form-control" {% if session['signed']==False or session['username']!= user.username %} readonly {%endif%}>
+			  <p class="help-block" id="error_tag_coursera_uri">{{ skillform.skill.errors[0] }}</p>
+          </div>
+		  </div>
+		  </div>
+		  {%endfor%}
+		  </div>	   
+</form>			  
+          <!--</form>-->
+        </div>
+		{% if session['signed'] and session['username']== user.username %}
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-danger btn-default pull-left" id ="mitbtnadd"> Add</button>		
+		  <button type="submit" class="btn btn-danger btn-default pull-left" id ="mitbtndel"> Delete</button>		
+		  <button type="submit" class="btn btn-danger btn-default pull-right" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
+          <button type="submit" class="btn btn-danger btn-default pull-right" data-dismiss="modal" id ="mitform_btnsave"> Save</button>
+		  
+        </div>
+		{%endif%}
+      </div>
+      
+    </div>
+  </div> 
+</div>
+
+<div class="container">
+  <!-- Modal -->
+  <div class="modal fade" id="myModalUdacity" role="dialog">
+    <div class="modal-dialog">    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header" id="modal-header-udacity" style="padding:35px 50px;">		  
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+		  <div class="row">
+			<div class="col-md-12" style="text-align:center">
+				<img src="/static/logos/udacity.jpg" alt="udacity" align="middle"/>
+			</div>
+		  </div>
+        </div>
+        <div class="modal-body" style="padding:40px 50px;" >		
+          <form role="form" action="" method="POST" id="udacityform">		  
+		  {{ addudacityform.hidden_tag() }}
+		  {{ addudacityform.csrf_token}}		  
+		  {%if user.udacity|length==0%}
+			{% if session['signed'] and session['username']== user.username %}
+			<div id="noudacitycourses">
+			Please add Udacity courses!
+			</div>				
+			<div class="form-group">
+			<!--{{ addcourseraform.courseracourses() }}-->
+			</div>
+			<div id="noudacitycoursespresent">
+			
+			</div>
+			
+<!--</form>-->			
+		  {%else%}		  
+			No courses has been added!		  
+		  {%endif%}
+		  {%endif%}
+		  <div id="udacitycoursespresent">
+		  {% for course in user.udacity %}
+		  <div class="panel panel-default" id="_udacitycoursesid{{loop.index-1}}">
+			<div class="panel-body">
+		  <div class="form-group">				
+              <label for="udacitycourses-{{loop.index-1}}-udacity_nm"><span class="glyphicon glyphicon-book"></span>Course name</label>
+			  <input id="udacitycourses-{{loop.index-1}}-id" name="mitcourses-{{loop.index-1}}-id" type="hidden" value="{{course.id}}">
+			  <input id="udacitycourses-{{loop.index-1}}-udacity_nm" name="mitcourses-{{loop.index-1}}-udacity_nm" type="text" value="{{course.udacity_name}}" class="form-control"  {% if session['signed']==False or session['username']!= user.username %} readonly {%endif%}>
+			  <p class="help-block" id="error_tag_coursera_nm">{{ skillform.skill.errors[0] }}</p>
+			  <label for="udacitycourses-{{loop.index-1}}-udacity_uri"><span class="glyphicon glyphicon-link"></span> Course url</label>
+			  <input id="udacitycourses-{{loop.index-1}}-udacity_uri" name="mitcourses-{{loop.index-1}}-udacity_uri" type="text" value="{{course.udacity_url}}" class="form-control" {% if session['signed']==False or session['username']!= user.username %} readonly {%endif%}>
+			  <p class="help-block" id="error_tag_coursera_uri">{{ skillform.skill.errors[0] }}</p>
+          </div>
+		  </div>
+		  </div>
+		  {%endfor%}
+		  </div>	   
+</form>			  
+          <!--</form>-->
+        </div>
+		{% if session['signed'] and session['username']== user.username %}
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-danger btn-default pull-left" id ="udacitybtnadd"> Add</button>	
+		  <button type="submit" class="btn btn-danger btn-default pull-left" id ="udacitybtndel"> Delete</button>			  
+		  <button type="submit" class="btn btn-danger btn-default pull-right" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
+          <button type="submit" class="btn btn-danger btn-default pull-right" data-dismiss="modal" id ="udacityform_btnsave"> Save</button>
+		  
+        </div>
+		{%endif%}
+      </div>
+      
+    </div>
+  </div> 
+</div>
+
+{% endblock %}
+
+{% block footer %}
+<script>
+{%if user.udacity|length==0%}
+var i = 0;
+var j = 0;
+console.log("udacityform "+ i);
+console.log("udacityformjjjj "+ j);
+
+$('#udacitybtnadd')
+        .button()
+        // Add dynamic fields
+        .on('click', function(event, ui){            
+            $('#udacitycoursespresent').append('<div class="panel panel-default" id = "_udacitycoursesid'+j+'"> <div class="panel-body"> <div class="form-group"> <label for="udacitycourses-'+i+'-udacity_nm"><span class="glyphicon glyphicon-book"></span>Course name</label> <input id="udacitycourses-'+i+'-id" name="udacitycourses-'+i+'-id" type="hidden" value=""> <input id="udacitycourses-'+i+'-udacity_nm" name="udacitycourses-'+i+'-udacity_nm" type="text" value="" class="form-control"> <label for="udacitycourses-'+i+'-udacity_uri"><span class="glyphicon glyphicon-link"></span> Course url</label> <input id="udacitycourses-'+i+'-udacity_uri" name="udacitycourses-'+i+'-udacity_uri" type="text" value="" class="form-control"> </div> </div> </div>');
+			i++;
+			j++;
+			console.log("udacityadd "+ i);
+			$('#noudacitycourses').hide();
+			$('#udacitybtndel').show();
+    });
+
+	$('#udacitybtndel')
+        .button()
+        // Add dynamic fields
+        .on('click', function(event, ui){   
+			
+			console.log("udacitydel "+ j);
+			j--;
+            $('#_udacitycoursesid'+j).remove();
+			console.log("xxxx "+ i);
+			console.log("yyyy "+ j);
+			if (j==0){
+			$('#noudacitycourses').show();
+			$('#udacitybtndel').hide();
+			}
+    });
+	
+{%else%}
+var iu = ($('#udacitycoursespresent div').size())/3;
+var ju = iu;
+console.log("udacityform "+ iu);
+
+$('#udacitybtnadd')
+        .button()
+        // Add dynamic fields
+        .on('click', function(event, ui){            
+            $('#udacitycoursespresent').append('<div class="panel panel-default" id = "_udacitycoursesid'+iu+'"> <div class="panel-body"> <div class="form-group"> <label for="udacitycourses-'+iu+'-udacity_nm"><span class="glyphicon glyphicon-book"></span>Course name</label> <input id="udacitycourses-'+iu+'-id" name="udacitycourses-'+iu+'-id" type="hidden" value=""> <input id="udacitycourses-'+iu+'-udacity_nm" name="udacitycourses-'+iu+'-udacity_nm" type="text" value="" class="form-control"> <label for="udacitycourses-'+iu+'-udacity_uri"><span class="glyphicon glyphicon-link"></span> Course url</label> <input id="udacitycourses-'+iu+'-udacity_uri" name="udacitycourses-'+iu+'-udacity_uri" type="text" value="" class="form-control"> </div> </div> </div>');
+			iu++;
+			ju++;
+			$('#noudacitycourses').hide();
+    });
+	
+	$('#udacitybtndel')
+        .button()
+        // Add dynamic fields
+        .on('click', function(event, ui){  			
+			console.log("_udacitycoursesid"+ ju);
+			console.log("_udacitycoursesid"+ iu);
+			ju--;
+			var udacity_id = document.getElementById("_udacitycoursesid" + ju).getElementsByTagName('div')[0].getElementsByTagName('div')[0].getElementsByTagName('input')[0].attributes[3].value;
+			 var id = {{user.id}};				 
+			 console.log('udacity_id'+udacity_id);	
+			 console.log('id'+id);				 
+			 deleteUdacity(id, udacity_id);
+			 
+            $('#_udacitycoursesid'+ju).remove();
+			console.log("xxxx "+ iu);
+			console.log("_udacitycoursesid"+ju);
+			if (ju==0){
+			$('#noudacitycourses').show();
+			$('#udacitybtndel').hide();
+			$("#udacityform_btnsave").hide();
+			}
+    });
+	
+	$('#udacitybtndel')
+        .button()
+        // Add dynamic fields
+        .on('click', function(event, ui){   
+			
+			console.log("udacitydel "+ i);
+			i--;
+            $('#udacitycoursesid'+i).remove();
+			
+			if (i==0){
+			$('#noudacitycourses').show();
+			$('#udacitybtndel').hide();
+			}
+    });
+
+{%endif%}
+ $("#udacityform_btnsave").click(function(){ 		
+        $.post(
+            "{{ url_for('profile.ProfileView:udacity_update') }}",
+            $("#udacityform").serialize(),
+            function(data, textStatus) {    
+				console.log(data);
+                var errors = $.parseJSON(data);                
+                $("#error_tag_coursera_nm").text("");
+				$("#error_tag_coursera_uri").text("");
+                if(errors.iserror)
+                {                  
+                    if(errors.courseracourses.coursera_nm!=undefined) $("#error_tag_coursera_nm").text(errors.coursera_nm[0]);
+					if(errors.courseracourses.coursera_uri!=undefined) $("#error_tag_coursera_uri").text(errors.coursera_uri[0]);
+                }else if (errors.savedsuccess)
+                {
+                    $("#myModalUdacity").modal('hide');
+                    location.reload();
+                }
+            }
+        );
+	});	
+	
+		function deleteUdacity(id, udacity_id){
+$.getJSON(
+			"/profile/udacity_delete",
+			{'udacity_id': udacity_id,
+			'id': id}
+		).done(function(data){
+			
+		}).fail(function(data,textstatus,xhr){
+			console.log('fail = ' + data + ', textstatus ' + textstatus );
+		});
+}	
+	
+
+{%if user.mit|length==0%}
+var i = 0;
+var j = 0;
+console.log("mitform "+ i);
+
+$('#mitbtnadd')
+        .button()
+        // Add dynamic fields
+        .on('click', function(event, ui){            
+            $('#mitcoursespresent').append('<div class="panel panel-default" id="_mitcoursesid'+j+'"> <div class="panel-body"> <div class="form-group"> <label for="mitcourses-'+i+'-edx_nm"><span class="glyphicon glyphicon-book"></span>Course name</label> <input id="mitcourses-'+i+'-id" name="mitcourses-'+i+'-id" type="hidden" value=""> <input id="mitcourses-'+i+'-mit_nm" name="mitcourses-'+i+'-mit_nm" type="text" value="" class="form-control"> <label for="mitcourses-'+i+'-mit_uri"><span class="glyphicon glyphicon-link"></span> Course url</label> <input id="mitcourses-'+i+'-mit_uri" name="mitcourses-'+i+'-mit_uri" type="text" value="" class="form-control"> </div> </div> </div>');
+			i++;
+			j++;
+			$('#nomitcourses').hide();
+			$('#mitbtndel').show();
+    });
+	
+	$('#mitbtndel')
+        .button()
+        // Add dynamic fields
+        .on('click', function(event, ui){   
+			
+			console.log("udacitydel "+ j);
+			j--;
+            $('#_mitcoursesid'+j).remove();
+			console.log("xxxx "+ i);
+			console.log("yyyy "+ j);
+			if (j==0){
+			$('#nomitcourses').show();
+			$('#mitbtndel').hide();
+			}
+    });
+	
+{%else%}
+var im = ($('#mitcoursespresent div').size())/3;
+var jm = im;
+console.log("mitform "+ i);
+
+$('#mitbtnadd')
+        .button()
+        // Add dynamic fields
+        .on('click', function(event, ui){            
+            $('#mitcoursespresent').append('<div class="panel panel-default" id="_mitcoursesid'+im+'"> <div class="panel-body"> <div class="form-group"> <label for="mitcourses-'+im+'-edx_nm"><span class="glyphicon glyphicon-book"></span>Course name</label> <input id="mitcourses-'+im+'-id" name="mitcourses-'+im+'-id" type="hidden" value=""> <input id="mitcourses-'+im+'-mit_nm" name="mitcourses-'+im+'-mit_nm" type="text" value="" class="form-control"> <label for="mitcourses-'+im+'-mit_uri"><span class="glyphicon glyphicon-link"></span> Course url</label> <input id="mitcourses-'+im+'-mit_uri" name="mitcourses-'+im+'-mit_uri" type="text" value="" class="form-control"> </div> </div> </div>');
+			i++;
+			$('#nomitcourses').hide();
+			$('#mitbtndel').show();
+    });
+	
+	$('#mitbtndel')
+        .button()
+        // Add dynamic fields
+        .on('click', function(event, ui){  			
+			console.log("_mitcoursesid"+ jm);
+			console.log("_mitcoursesid"+ im);
+			jm--;
+			var mit_id = document.getElementById("_mitcoursesid" + jm).getElementsByTagName('div')[0].getElementsByTagName('div')[0].getElementsByTagName('input')[0].attributes[3].value;
+			 var id = {{user.id}};				 
+			 console.log('mit_id'+mit_id);	
+			 console.log('id'+id);				 
+			 deleteMIT(id, mit_id);
+			 
+            $('#_mitcoursesid'+jm).remove();
+			console.log("xxxx "+ im);
+			console.log("_mitcoursesid"+jm);
+			if (jm==0){
+			$('#nomitcourses').show();
+			$('#mitbtndel').hide();
+			$("#mitform_btnsave").hide();
+			}
+    });
+
+{%endif%}
+ $("#mitform_btnsave").click(function(){ 		
+        $.post(
+            "{{ url_for('profile.ProfileView:mit_update') }}",
+            $("#mitform").serialize(),
+            function(data, textStatus) {    
+				console.log(data);
+                var errors = $.parseJSON(data);                
+                $("#error_tag_coursera_nm").text("");
+				$("#error_tag_coursera_uri").text("");
+                if(errors.iserror)
+                {                  
+                    if(errors.courseracourses.coursera_nm!=undefined) $("#error_tag_coursera_nm").text(errors.coursera_nm[0]);
+					if(errors.courseracourses.coursera_uri!=undefined) $("#error_tag_coursera_uri").text(errors.coursera_uri[0]);
+                }else if (errors.savedsuccess)
+                {
+                    $("#myModalMIT").modal('hide');
+                    location.reload();
+                }
+            }
+        );
+	});	
+	
+	function deleteMIT(id, mit_id){
+$.getJSON(
+			"/profile/mit_delete",
+			{'mit_id': mit_id,
+			'id': id}
+		).done(function(data){
+			
+		}).fail(function(data,textstatus,xhr){
+			console.log('fail = ' + data + ', textstatus ' + textstatus );
+		});
+}	
+
+{%if user.edx|length==0%}
+var ii = ($('#edxcoursespresent div').size());
+var jj = 0;
+console.log("edxform "+ ii);
+
+$('#edxbtnadd')
+        .button()
+        // Add dynamic fields
+        .on('click', function(event, ui){            
+            $('#edxcoursespresent').append('<div class="panel panel-default" id="_edxcoursesid'+ii+'"> <div class="panel-body"> <div class="form-group"> <label for="edxcourses-'+ii+'-edx_nm"><span class="glyphicon glyphicon-book"></span>Course name</label> <input id="edxcourses-'+ii+'-id" name="edxcourses-'+ii+'-id" type="hidden" value=""> <input id="edxcourses-'+ii+'-edx_nm" name="edxcourses-'+ii+'-edx_nm" type="text" value="" class="form-control"> <label for="edxcourses-'+ii+'-edx_uri"><span class="glyphicon glyphicon-link"></span> Course url</label> <input id="edxcourses-'+ii+'-edx_uri" name="edxcourses-'+ii+'-edx_uri" type="text" value="" class="form-control"> </div> </div> </div>');
+			ii++;
+			jj++;
+			$('#noedxcourses').hide();
+			$('#edxbtndel').show();
+    });
+	
+	$('#edxbtndel')
+        .button()
+        // Add dynamic fields
+        .on('click', function(event, ui){   
+			
+			console.log("udacitydel "+ jj);
+			jj--;
+            $('#_edxcoursesid'+jj).remove();
+			console.log("xxxx "+ ii);
+			console.log("yyyy "+ jj);
+			if (jj==0){
+			$('#noedxcourses').show();
+			$('#edxbtndel').hide();
+			}
+    });
+	
+{%else%}
+var ii = ($('#edxcoursespresent div').size())/3;
+console.log("edxcourseraform "+ ii);
+var jj=ii;
+$('#edxbtnadd')
+        .button()
+        // Add dynamic fields
+        .on('click', function(event, ui){            
+            $('#edxcoursespresent').append('<div class="panel panel-default" id="_edxcoursesid'+ii+'"> <div class="panel-body"> <div class="form-group"> <label for="edxcourses-'+ii+'-edx_nm"><span class="glyphicon glyphicon-book"></span>Course name</label> <input id="edxcourses-'+ii+'-id" name="edxcourses-'+ii+'-id" type="hidden" value=""> <input id="edxcourses-'+ii+'-edx_nm" name="edxcourses-'+ii+'-edx_nm" type="text" value="" class="form-control"> <label for="edxcourses-'+ii+'-edx_uri"><span class="glyphicon glyphicon-link"></span> Course url</label> <input id="edxcourses-'+ii+'-edx_uri" name="edxcourses-'+ii+'-edx_uri" type="text" value="" class="form-control"> </div> </div> </div>');
+			ii++;
+			jj++;
+			$('#noedxcourses').hide();
+    });
+	$('#edxbtndel')
+        .button()
+        // Add dynamic fields
+        .on('click', function(event, ui){  			
+			console.log("_edxcoursesid"+ jj);
+			console.log("_edxcoursesid"+ ii);
+			jj--;
+			var edx_id = document.getElementById("_edxcoursesid" + jj).getElementsByTagName('div');
+			console.log('edx_id'+edx_id);
+			var edx_id = document.getElementById("_edxcoursesid" + jj).getElementsByTagName('div')[0].getElementsByTagName('div')[0].getElementsByTagName('input')[0].attributes[3].value;
+			 var id = {{user.id}};				 
+			 console.log('edx_id'+edx_id);	
+			 console.log('id'+id);				 
+			 deleteEdx(id, edx_id);
+			 
+            $('#_edxcoursesid'+jj).remove();
+			console.log("xxxx "+ ii);
+			console.log("_edxcoursesid"+jj);
+			if (jj==0){
+			$('#noedxcourses').show();
+			$('#edxbtndel').hide();
+			$("#edxform_btnsave").hide();
+			}
+    });
+
+{%endif%}
+ $("#edxform_btnsave").click(function(){ 		
+        $.post(
+            "{{ url_for('profile.ProfileView:edx_update') }}",
+            $("#edxform").serialize(),
+            function(data, textStatus) {    
+				console.log(data);
+                var errors = $.parseJSON(data);                
+                $("#error_tag_coursera_nm").text("");
+				$("#error_tag_coursera_uri").text("");
+                if(errors.iserror)
+                {                  
+                    if(errors.courseracourses.coursera_nm!=undefined) $("#error_tag_coursera_nm").text(errors.coursera_nm[0]);
+					if(errors.courseracourses.coursera_uri!=undefined) $("#error_tag_coursera_uri").text(errors.coursera_uri[0]);
+                }else if (errors.savedsuccess)
+                {
+                    $("#myModalEDX").modal('hide');
+                    location.reload();
+                }
+            }
+        );
+	});	
+	
+	
+	
+	function deleteEdx(id, edx_id){
+$.getJSON(
+			"/profile/edx_delete",
+			{'edx_id': edx_id,
+			'id': id}
+		).done(function(data){
+			
+		}).fail(function(data,textstatus,xhr){
+			console.log('fail = ' + data + ', textstatus ' + textstatus );
+		});
+}
+	
+{%if user.coursera|length==0%}
+var i = ($('#nocoursespresent div').size());
+var j = 0;
+console.log("courseraform "+ i);
+
+$('#courserabtnadd')
+        .button()
+        // Add dynamic fields
+        .on('click', function(event, ui){            
+            $('#coursespresent').append('<div class="panel panel-default" id="_courseracoursesid'+j+'"> <div class="panel-body"> <div class="form-group"> <label for="courseracourses-'+i+'-coursera_nm"><span class="glyphicon glyphicon-book"></span>Course name</label> <input id="courseracourses-'+i+'-id" name="courseracourses-'+i+'-id" type="hidden" value=""> <input id="courseracourses-'+i+'-coursera_nm" name="courseracourses-'+i+'-coursera_nm" type="text" value="" class="form-control"> <label for="courseracourses-'+i+'-coursera_uri"><span class="glyphicon glyphicon-link"></span> Course url</label> <input id="courseracourses-'+i+'-coursera_uri" name="courseracourses-'+i+'-coursera_uri" type="text" value="" class="form-control"> </div> </div> </div>');
+			i++;
+			j++;
+			$('#nocourses').hide();
+			$('#courserabtndel').show();
+    });
+	
+	$('#courserabtndel')
+        .button()
+        // Add dynamic fields
+        .on('click', function(event, ui){   
+			
+			console.log("udacitydel "+ j);
+			j--;
+            $('#_courseracoursesid'+j).remove();
+			console.log("xxxx "+ i);
+			console.log("_courseracoursesid "+ j);
+			if (j==0){
+			$('#nocourses').show();
+			$('#courserabtndel').hide();
+			}
+    });
+	
+	
+{%else%}
+var i = ($('#coursespresent div').size())/3;
+var j=i;
+$('#courserabtnadd')
+        .button()
+        // Add dynamic fields
+        .on('click', function(event, ui){            
+            $('#coursespresent').append('<div class="panel panel-default" id="_courseracoursesid'+j+'"> <div class="panel-body"> <div class="form-group"> <label for="courseracourses-'+i+'-coursera_nm"><span class="glyphicon glyphicon-book"></span>Course name</label> <input id="courseracourses-'+i+'-id" name="courseracourses-'+i+'-id" type="hidden" value=""> <input id="courseracourses-'+i+'-coursera_nm" name="courseracourses-'+i+'-coursera_nm" type="text" value="" class="form-control"> <label for="courseracourses-'+i+'-coursera_uri"><span class="glyphicon glyphicon-link"></span> Course url</label> <input id="courseracourses-'+i+'-coursera_uri" name="courseracourses-'+i+'-coursera_uri" type="text" value="" class="form-control"> </div> </div> </div>');
+			i++;
+			j++;
+			$('#nocourses').hide();
+    });
+	
+	$('#courserabtndel')
+        .button()
+        // Add dynamic fields
+        .on('click', function(event, ui){   
+			
+			console.log("courseradel "+ j);
+			j--;
+			var coursera_id = document.getElementById("_courseracoursesid" + j).getElementsByTagName('div')[0].getElementsByTagName('div')[0].getElementsByTagName('input')[0].attributes[3].value;	
+			 var id = {{user.id}};				 
+			 console.log('coursera_id'+coursera_id);	
+			 console.log('id'+id);				 
+			 deleteCoursera(id, coursera_id);
+			 
+            $('#_courseracoursesid'+j).remove();
+			console.log("xxxx "+ i);
+			console.log("_courseracoursesid"+j);
+			if (j==0){
+			$('#nocourses').show();
+			$('#courserabtndel').hide();
+			$("#courseraform_btnsave").hide();
+			}
+    });
+
+{%endif%}
+ $("#courseraform_btnsave").click(function(){ 		
+        $.post(
+            "{{ url_for('profile.ProfileView:coursera_update') }}",
+            $("#courseraform").serialize(),
+            function(data, textStatus) {    
+				console.log(data);
+                var errors = $.parseJSON(data);                
+                $("#error_tag_coursera_nm").text("");
+				$("#error_tag_coursera_uri").text("");
+                if(errors.iserror)
+                {                  
+                    if(errors.courseracourses.coursera_nm!=undefined) $("#error_tag_coursera_nm").text(errors.coursera_nm[0]);
+					if(errors.courseracourses.coursera_uri!=undefined) $("#error_tag_coursera_uri").text(errors.coursera_uri[0]);
+                }else if (errors.savedsuccess)
+                {
+                    $("#myModal").modal('hide');
+                    location.reload();
+                }
+            }
+        );
+	});	
+	
+	function deleteCoursera(id, coursera_id){
+$.getJSON(
+			"/profile/coursera_delete",
+			{'coursera_id': coursera_id,
+			'id': id}
+		).done(function(data){
+			
+		}).fail(function(data,textstatus,xhr){
+			console.log('fail = ' + data + ', textstatus ' + textstatus );
+		});
+}
+</script>
+
+<script>
+    $(document).ready(function(){
+	window.counterEducation = {{user.universities|length}} + 1;
+	
+				if(counterEducation==1){
+					  $("#univ_btndel").hide();		  
+					  }			 
+
+		  
+    $("#univ_btnadd").click(function () {     
+    console.log({{user.universities|length}} + 1);
+	$("#univ_btndel").show();
+    counterEducation++;	
+	     });	 
+	 
+     $("#univ_btndel").click(function () {
+    if(counterEducation==1){		  
+          alert("No more university to remove");
+          return false;   }
+         else {counterEducation--;
+			 var univ = document.getElementById("universityCount" + counterEducation).getElementsByTagName('a')[0].attributes[0].value;	
+			 var id = document.getElementById("universityCount" + counterEducation).getElementsByTagName('a')[0].attributes[3].value;				 
+			 console.log('univ'+univ);	
+			 console.log('id'+id);				 
+			 deleteUniversity(id, univ);
+             $("#universityCount" + counterEducation).remove();	
+
+			if(counterEducation==1){
+					  $("#univ_btndel").hide();		  
+					  }			 
+			 }
+     });     
+    });
+  
+function deleteUniversity(id, univ){
+$.getJSON(
+			"/account/deleteUniversity",
+			{'univ': univ,
+			'id': id}
+		).done(function(data){
+			
+		}).fail(function(data,textstatus,xhr){
+			console.log('fail = ' + data + ', textstatus ' + textstatus );
+		});
+}
+
+
+function deleteSkills(id)
+    {
+        bootbox.confirm("<strong>Delete all Skills</strong><p>You can't undo this action. Are you sure?</p>", function(result){
+            if(result)
+            {
+                 $.getJSON(
+                    "/profile/deleteskills/" + id,
+                    {}
+                ).done(function(data){
+                    location.reload();
+                }).fail(function(data,textstatus,xhr){
+                    console.log('fail = ' + data + ', textstatus ' + textstatus );
+                })
+                ;
+            }
+        });
+    }
+    function editSkillform(id)
+    {	console.log('id '+ id);
+        $("#skill_id").val(id);
+        $.getJSON(
+            "/profile/get_skills/" + id,
+            {}
+        ).done(function(data){            
+            $("#skill").tagsinput("removeAll");
+            $("#skill").tagsinput("add", data.skill);
+            $("#skill_form").modal('show');
+        }).fail(function(data,textstatus,xhr){
+            console.log('fail = ' + data + ', textstatus ' + textstatus );
+        });
+    }
+</script>		
+
+{% if session['signed'] and session['username'] == user.username %}
+    <script src="/static/bootstrap3-editable/js/bootstrap-editable.min.js"></script>
+    <script>
+		$("#skillform_btnadd").click(function(){
+        $("#skill_id").val("");        
+        $("#skill").tagsinput("removeAll");
+        $("#skill_form").modal('show');
+        return false;
+    });
+
+    $("#skillform_btnsave").click(function(){		
+        $.post(
+            "{{ url_for('profile.ProfileView:add_update') }}",
+            $("#skillformid").serialize(),
+            function(data, textStatus) {    
+				console.log(data);
+                var errors = $.parseJSON(data);                
+                $("#error_tags").text("");
+                if(errors.iserror)
+                {                  
+                    if(errors.skill!=undefined) $("#error_tags").text(errors.tags[0]);
+                }else if (errors.savedsuccess)
+                {
+                    $("#skill_form").modal('hide');
+                    location.reload();
+                }
+            }
+        );
+    });	
+	
+		$('#education').editable({
+            placement: "right",
+            error: function (errors) {
+            }
+        });	
+
+		$('#education1').editable({
+            placement: "right",
+            error: function (errors) {
+            }
+        });
+		
+		$('#education2').editable({
+            placement: "right",
+            error: function (errors) {
+            }
+        });	
+		
+		$('#education3').editable({
+            placement: "right",
+            error: function (errors) {
+            }
+        });
+		
+		$('#education4').editable({
+            placement: "right",
+            error: function (errors) {
+            }
+        });	
+	
+        $('#fullname').editable({
+            placement: "right",
+            error: function (errors) {
+            }
+        });
+        $('#position').editable({
+            placement: "right",            
+            error: function (errors) {                
+            }
+        });
+
+        $('#location').editable({
+            placement:"right",
+            error: function (errors) {
+            }
+        });
+
+		 $('#alma_mater').editable({
+            placement:"right",
+            error: function (errors) {
+            }
+        });
+		
+		 $('#linkedin').editable({
+            placement:"right",
+            error: function (errors) {
+            },
+			display: function(value, response) {
+			//value is something like 'http://xxx/xxx.png'
+			$(this).html('<img id="linkedinlogo" width="200" height = "70" class="img img-rounded" src="/static/logos/linkedin.jpg">');
+		}
+			
+        });
+		$('#stackoverflow').editable({
+            placement:"right",
+            error: function (errors) {
+            },
+			display: function(value, response) {
+			//value is something like 'http://xxx/xxx.png'
+			$(this).html('<img id="stackoverflowlogo" width="200" height = "70" class="img img-rounded" src="/static/logos/stackoverflow.jpg">');
+		}
+        });
+		$('#aboutme').editable({
+            placement:"right",
+            error: function (errors) {
+            },
+			display: function(value, response) {
+			//value is something like 'http://xxx/xxx.png'
+			$(this).html('<img id="aboutmelogo" width="200" height = "70" class="img img-rounded" src="/static/logos/aboutme.jpg">');
+		}
+        });
+		$('#visualcv').editable({
+            placement:"left",
+            error: function (errors) {
+            },
+			display: function(value, response) {
+			//value is something like 'http://xxx/xxx.png'
+			$(this).html('<img id="visualcvlogo" width="200" height = "70" class="img img-rounded" src="/static/logos/visualcv.jpg">');
+		}
+        });
+		$('#facebook').editable({
+            placement:"right",
+            error: function (errors) {
+            },
+			display: function(value, response) {
+			//value is something like 'http://xxx/xxx.png'
+			$(this).html('<img id="facebooklogo" width="200" height = "70" class="img img-rounded" src="/static/logos/facebook.jpg">');
+		}
+        });
+		$('#twitter').editable({
+            placement:"right",
+            error: function (errors) {
+            },
+			display: function(value, response) {
+			//value is something like 'http://xxx/xxx.png'
+			$(this).html('<img id="twitterlogo" width="200" height = "70" class="img img-rounded" src="/static/logos/twitter.jpg">');
+		}
+        });
+		$('#quora').editable({
+            placement:"right",
+            error: function (errors) {
+            },
+			display: function(value, response) {
+			//value is something like 'http://xxx/xxx.png'
+			$(this).html('<img id="quoralogo" width="200" height = "70" class="img img-rounded" src="/static/logos/quora.jpg">');
+		}
+        });
+		$('#github').editable({
+            placement:"left",
+            error: function (errors) {
+            },
+			display: function(value, response) {
+			//value is something like 'http://xxx/xxx.png'
+			$(this).html('<img id="githublogo" width="200" height = "70" class="img img-rounded" src="/static/logos/github.jpg">');
+		}
+        });
+		$('#coursera').editable({
+            placement:"right",
+            error: function (errors) {
+            }
+        });
+		$('#edx').editable({
+            placement:"right",
+            error: function (errors) {
+            }
+        });
+		$('#udemy').editable({
+            placement:"right",
+            error: function (errors) {
+            }
+        });
+		$('#mit').editable({
+            placement:"right",
+            error: function (errors) {
+            }
+        });
+		
+        function uploadAvatar(id)
+        {
+            $("#avatar_user_id").val(id);
+            $('#avatar_form').modal();
+        }
+
+        $(function () {
+            $('#upload-file-btn').click(function () {			
+                var form_data = new FormData($('#upload-file')[0]);
+                form_data.append("avatar_user_id", $("avatar_user_id").val());				
+                $.ajax({
+                    type: "POST",
+                    url: "account/upload_avatar",
+                    data: form_data,
+                    contentType: false,
+                    cache: false,
+                    processData: false,
+                    async: true,
+                    success: function (data) {    
+						
+                        $('#avatar_form').modal('hide');
+                        $("#avatar").attr("src", data);
+                    },
+                });
+            });
+        });
+    </script>
+	
+	<script>
+	var numUniv = ($('#university div').size())+1;
+	console.log("numUniv" + numUniv);
+$(function(){
+    $('body').on('click', '.editable', function(event, ui){
+        // Check for existing widget
+        if(!$(this).data('editable')){
+            // Create instance and invoke it
+            $(this).editable({mode: 'inline'}).editable('show');
+        }
+        /* Otherwise, the x-editable widget's click handler will
+        already take over here */
+    })
+
+    $('#univ_btnadd')
+        .button()
+        // Add dynamic fields
+        .on('click', function(event, ui){
+            
+            $('#university').append('<div class="row" id="universityCount'+numUniv+'"><a class="editable" data-name="" data-type="text" data-url="{{ url_for("account.AccountView:addEducation") }}" data-pk="{{user.id}}"  data-title="Add/Edit your education">University</a></div>');
+			numUniv++;
+    });
+	
+	$('#univ_btndel')
+        .button()
+        // Remove dynamic fields
+        .on('click', function(){ 
+			console.log(('#universityCount'+numUniv));		
+            $('#universityCount'+numUniv).remove;
+			numUniv--;
+    });
+});
+</script>
+
+
+
+{% endif %}
+
+<script>
+$(document).ready(function(){
+    $("#courseralogo").click(function(e){
+        $("#myModal").modal();	
+		e.preventDefault();		
+    });
+	
+	$("#edxlogo").click(function(e){
+        $("#myModalEDX").modal();
+		e.preventDefault();
+    });
+	
+	$("#mitlogo").click(function(e){
+        $("#myModalMIT").modal();
+		e.preventDefault();
+    });
+	
+	$("#udacitylogo").click(function(e){
+        $("#myModalUdacity").modal();
+		e.preventDefault();
+    });
+	
+	document.getElementById("linkedinlogo").style.visibility = "visible";
+	var edx = ($('#edxcoursespresent div').size());
+	var mit = ($('#mitcoursespresent div').size());
+	var udacity = ($('#udacitycoursespresent div').size());
+	if (udacity==0){$('#udacitybtndel').hide();}
+	if (mit==0){$('#mitbtndel').hide();}
+	if (edx==0){$('#edxbtndel').hide();}
+	var i = ($('#coursespresent div').size());
+	if (i==0){
+	$('#courserabtndel').hide();}
+	
+});
+</script>
+</section>
+
+{% endblock %}}

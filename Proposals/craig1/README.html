@@ -1,0 +1,167 @@
+
+<html>
+ <head> </head>
+
+ <body>
+   <h2>Overview</h2>
+     <p>
+     This is suite of Python script to crawl throw craigslist postings, retrieve data and 
+     send E-mail messages.
+     </p>
+     <p>
+     It consists of 3 scripts:
+
+      <ul>
+          <li>CraglistCrawler.py - downloads craigslist contents started with specified page, parses contents and store data to xml file </li>
+          <li>MailExtractor.py - uses xml file create by CraglistCrawler.py  to detect E-mail addresses bound to posts and store updated contents to another xml file</li>
+          <li>MailSender.py - uses xml file created by MailExtractor.py to send E-mail messages</li>
+      </ul>
+     </p>
+
+     <p>
+     There is also config.ini file that contains configuration parameter used by all scripts. It must be in the current directory when scripts are invoked.
+    
+     </p>
+
+   <h2>Requirements</h2>
+
+     <p>
+     All scripts require Python version 3. They will not work on Python 2.7. 
+     </p>
+
+     <p>
+     MailExtractor.py requires Firefox and <a href="https://addons.mozilla.org/en-US/firefox/addon/remote-control/">Remote Control plugin</a> to be installed. It was tested on Firefox 40.0.3. 
+     I guess any reasonably fresh version of Firefox will work. 
+     </p>
+
+     <p>
+        After plugin installation make sure that:  
+      <ul>
+          <li>Firefox is restarted</li>
+          <li>You turned on "Send remote commands to currently active tab" in Remote Control plugin settings</li>
+          <li>You turned remote control on</li>
+      </ul>
+       
+     </p>
+
+   <h2>CraglistCrawler.py</h2>
+
+   <p>
+   Invoke it like this: <code>python CraglistCrawler.py  -url https://sfbay.craigslist.org/search/boa?</code>
+   </p>
+   <p>
+   Or this: <code>python CraglistCrawler.py  -url https://sfbay.craigslist.org/search/boa?0</code>
+   </p>
+   <p>
+   Or this: <code>python CraglistCrawler.py  -url https://sfbay.craigslist.org/search/boa?100</code>
+  </p>
+
+   <p>
+   In first case all posts from  https://sfbay.craigslist.org/search/boa? will be downloaded including ones that are located on next pages.
+   </p>
+
+   <p>
+   In second case only posts located on specified page will be downloaded. The same is true for third case.
+   </p>
+
+   <p>
+   Property 'record-contents' in config.ini specifies roughly timeout value between download of postings. Exact value is random.
+   It was done to avoid situation when server blocks too much of too fast (or too regular) downloads.
+   </p>
+
+   <p>
+   Script produces following output:
+      <ul>
+          <li>hrefs.log - intermediate list of URLs to posts</li>
+          <li>out.xml - data retrieved from posts</li>
+          <li>entries - directory containg HTML snaphosts of posts</li>
+      </ul>
+   </p>
+
+   <p>
+   All these names are hard-coded now. hrefs.log and out.xml are silently overwritten on each run of script. 
+   entries is removed at start of each run and refilled again. Be careful.
+   </p>
+
+   <h2>MailExtractor.py</h2>
+
+   <p>
+   Before starting make sure that Firefox is started, some Tab is open and "Remoted Control" pluging is turned on and properly configured.
+   </p>
+
+   <p>
+   You can invoke it like this: <code>python MailExtractor.py  probe</code> <br />
+   just to make check that port used to communicate with Firefox is alive.
+   </p>
+
+   <p>
+   You can invoke it this way: <code>python MailExtractor.py  load http://slashdot.org</code> <br />
+   or whatever URL you like to make sure that Firefox executes commands sent from Python script.
+   You should see tab loaded with mentioned URL contents.
+   </p>
+
+   <p>
+   And most interesting way to invoke it is following: <code>python MailExtractor.py get-addresses out.xml with-email.xml</code> <br />
+   </p>
+
+   <p>
+     In this mode script runs through out.xml contents, requests Firefox to load URL of post, then simulates 'Reply' button press, grabs resulting page
+   and parse it to figure out E-mail.
+   </p>
+
+   <p>
+   Property 'port' in [Firefox section] specifies port on Firefox side used to communicate with script. "Remote Control" plugin uses 32000 by default.
+   Make sure to keep in sync "Remote Control" setup and config.ini.
+   </p>
+
+   <p>
+    Two timeouts are also used. 'load-post' is timeout between request to load post page and 'Reply' button press simulation.
+    'load-reply' is timeout between "pressing" of reply and reading resuling contents.
+   </p>
+
+   <p>
+     Note that is for any reason Firefox starts to show captcha window and there is no success in getting rid of it you still 
+    have big amount of work automated. Just keep browser active and provide response. May be 'load-reply' will have to be increased in such case.
+   </p>
+
+
+   <p>
+     In my experiments Firefox did not ask captcha but my attempt to use smaller timeouts lead to failures in E-mail reads. It seems to be unavoidable
+    overhead inspired by HTML rendering engine of Firefox. May be turning of image loading or something like that would make Firefox fast and 
+    allow to decrease timeouts.
+   </p>
+
+   <p>
+    Both input and output file names are configurable.
+   </p>
+
+   <p>
+    On each processed post this script either print extracted E-mail address to standard output or complains that address is absent.
+    Keep in mind that such compaints could be caused by three kinds of reason: real absense of E-mail in provided info, two small timeouts,
+   or problems in communication between Firefox and script. 
+   </p>
+
+   <h2>MailSender.py</h2>
+
+   <p>
+   Invoke it like this: <code>python MailSender.py  with-email.xml "Subject" message-body.txt </code>
+   
+   </p>
+
+   <p> Note that subject is specified directly in command line and for message body file name is provided.
+   </p>
+
+   <p>It is assumed that SMTP via TLS is used (most popular way currently)</p>
+
+   <p>There is dedidated [E-mail] section in config.ini. It is just property of gmail that login name is
+  the same as sender address. It could be not a case on other SMTP server</p>
+
+   <p>Note also that gmail is very restrictive regarding application comminicating with it. May be you'll have to go 
+<a href="https://www.google.com/settings/security/lesssecureapps">here</a> to allow incoming connection for script </p>
+
+   <p>Other mail services could have their own pitfalls that are hard to predict in advance</p>
+
+       
+ </body>
+
+</html>

@@ -1,0 +1,35 @@
+/*
+* EM Scale
+* 72.5em = 1176px
+* 62.5em = 1000px
+*
+*
+*/
+.error404 .container { min-height: 90%; min-height: 90vh; padding: 5em 1em; }
+
+.top-bar-section ul li.demo-link:not(.has-form) a:not(.button) { color: #fff101; }
+.home .top-bar-section ul li.demo-link:not(.has-form) a:not(.button) { color: #EE5050; }
+div.wpcf7-mail-sent-ok { clear: both; border: 2px solid #7DDD54; text-align: center;}
+#requestDemo div.wpcf7-mail-sent-ok { color: #fff; }  
+.reveal-modal.open form input[type="submit"] { margin-bottom: 1em; }
+.contact-form-container textarea { height: 80px; box-shadow: none; border: none; }
+
+
+@media only screen and (max-width: 40em) { 
+    .home .slider-container .slider .slide { padding: 2em 1em; }
+    .home .slider-container .slider .slide .slide-content h1 { font-size: 1.25em; }
+    .home .slider-container .slider .slide .slide-content p { font-size: 1em; line-height: 1.5em; margin-top: 2em; } 
+    .page-container .data-scientist .button { line-height: 1.5em; padding: 1.5em; }
+    .page-container .real-time .demo-request { line-height: 1.5em; padding: 1em; }
+    .left-off-canvas-menu { z-index: 1500; }
+    .home .exit-off-canvas { z-index: -1;}
+}
+
+@media only screen and (max-width: 40em) and (orientation: landscape) {
+
+	.home .slider-container .slider .slide { padding: 1em 0; }
+	.home .slider-container .slider .slide .slide-content h1 { font-size: 1.25em; }
+	.home .slider-container .slider .slide .slide-content p { line-height: 1.75em; font-size: 0.85em; margin-top: 2em; }
+	.fw-page .hero-image { padding: 1em;  }
+
+}

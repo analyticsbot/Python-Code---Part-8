@@ -1,0 +1,305 @@
+{% extends "base-layout.html" %}
+{% block header %}
+{% if session['signed'] and session['username']== user.username %}
+<link href="/static/bootstrap3-editable/css/bootstrap-editable.css" rel="stylesheet"/>
+{% endif %}
+{% endblock %}
+
+{% block content %}
+<style type="text/css">
+    body.modal-open,
+    .modal-open .navbar-fixed-top
+    {
+        margin-right:0px;
+    }
+</style>
+<div class="page-header">    
+    {% if session['signed'] and session['username']== user.username %}
+        <h1><a href="#" id="fullname" data-type="text" data-url="{{ url_for('biography.BiographyView:edit_fullname') }}" data-pk="{{user.id}}"  data-title="Change your fullname">{{ user.fullname }}</a></h1>
+        <p><strong><a href="#" id="tagline" data-type="text" data-url="{{ url_for('biography.BiographyView:edit_tagline') }}" data-pk="{{user.id}}"  data-title="Change your tagline">{{ user.tagline }}</a></strong></p>
+    {% else %}
+        <h1>{{ user.fullname }}</h1>
+        <p><strong>{{ user.tagline }}</strong></p>
+    {% endif %}
+</div>
+<div class="row">
+    <div class="col-sm-4">
+        <div class="container" >
+            {% if session['signed'] and session['username']== user.username %}
+                <a href="javascript:uploadAvatar({{user.id}});"><img id="avatar" width="300" class="img img-rounded" src="{{ user.avatar }}"></a>
+                <p><a href="#" id="biography" data-type="textarea" data-url="{{ url_for('biography.BiographyView:edit_biography') }}" data-pk="{{user.id}}"  data-title="Change your short biography">{{ user.bio }}</a></p>
+            {% else %}
+                <img id="avatar" width="300" class="img img-rounded" src="{{ user.avatar }}">
+                <p>{{ user.bio }}</p>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="col-sm-8">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="navbar-left">
+
+                </div>
+                <form class="navbar-form navbar-right" role="search">
+                    {% if session['signed'] and session['username']== user.username %}
+                    <button class="btn btn-default btn-sm btn-success" data-toggle="modal" data-target="porto_form" id="portform_btnadd">Add</button>
+                    {% endif %}
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search">
+                    </div>
+                    <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
+                </form>
+            </div>
+        </div>
+
+      <div class="container">
+          <ul class="list-group">
+
+              {% if user.portfolio|length == 0 %}
+              Please add your awesome portfolio!
+              {% endif %}
+
+              {% for porto in user.portfolio %}
+              <li class="list-group-item">
+              <div class="container">
+                  <div class="row">
+                      <div class="col-sm-5">
+{% if session['signed'] and session['username']== user.username %}
+                          <a href="javascript:editPortform('{{porto.id}}');"><span class="glyphicon glyphicon-edit"></span></a> <a href="javascript:deletePortfolio('{{porto.id}}');"><span class="glyphicon glyphicon-remove"></span></a>
+{% endif %}
+                          <strong>
+                              {{ porto.title }}
+                          </strong>
+                          <p> 
+                              {{ porto.description}}
+                          </p>
+                      </div>
+                      <div class="col-sm-7">
+                {% for tag in porto.tags.split(',') %}
+                          <a href="#"><span class="badge badge-important pull-right">{{ tag }}</span></a>
+                {% endfor %}
+                      </div>
+                  </div>
+              </div>
+
+              </li>
+            {% endfor %}
+          </ul>
+      </div>
+    </div>
+</div><!-- /row -->
+
+<div class="modal fade" id="porto_form" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Portfolio</h4>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-1">
+                        </div>
+                        <div class="col-sm-10">
+                            <form class="form-horizontal" action="" method="POST" id="portform">
+                                {{ portoform.portfolio_id }}
+                    {{ portoform.hidden_tag() }}
+                                <div class="form-group">
+                     {{ portoform.title.label }}
+                    {{ portoform.title(class="form-control", placeholder="Give your project a clear and concise title")}}
+                                    <p class="help-block" id="error_title">{{ portoform.title.errors[0] }}</p>
+                                </div>
+
+                                <div class="form-group">
+                     {{ portoform.description.label }}
+                    {{ portoform.description(class="form-control", placeholder="Describe your project as interesting as possible")}}
+                                    <p class="help-block" id="error_description">{{ portoform.description.errors[0] }}</p>
+                                </div>
+
+                                <div class="form-group">
+                     {{ portoform.tags.label }}
+                                    <div>
+                    {{ portoform.tags(class="form-control", placeholder="What technology that you use? ", **{'data-role':'tagsinput'})}}
+                                    </div>
+                                    <p class="help-block" id="error_tags">{{ portoform.tags.errors[0] }}</p>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="col-sm-1">
+                        </div>
+                    </div>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary btn-success" id="portform_btnsave">Save</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="avatar_form" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">Upload Avatar</h4>
+      </div>
+      <div class="modal-body">
+          <form id="upload-file" method="post" enctype="multipart/form-data">
+              <input type="hidden" id="avatar_user_id" name="avatar_user_id"/>
+            <span class="btn btn-success fileinput-button">
+            <i class="glyphicon glyphicon-plus"></i>
+            <span>Add files...</span>
+                <input name="file" type="file">
+            </span>
+            <button id="upload-file-btn" type="button" class="btn btn-primary">Upload</button>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+
+{% block footer %}
+
+
+<script>
+
+    $(document).ready(function(){
+
+    });
+
+    function deletePortfolio(id)
+    {
+        bootbox.confirm("<strong>Portfolio deletion</strong><p>You can't undo this action. Are you sure?</p>", function(result){
+            if(result)
+            {
+                 $.getJSON(
+                    "/portfolio/delete/" + id,
+                    {}
+                ).done(function(data){
+                    location.reload();
+                }).fail(function(data,textstatus,xhr){
+                    alert('fail = ' + data + ', textstatus ' + textstatus );
+                })
+                ;
+            }
+        });
+    }
+
+    function editPortform(id)
+    {
+        $("#portfolio_id").val(id);
+        $.getJSON(
+            "/portfolio/get/" + id,
+            {}
+        ).done(function(data){
+            $("#portfolio_id").val(data.id);
+            $("#title").val(data.title);
+            $("#description").val(data.description);
+            $("#tags").tagsinput("removeAll");
+            $("#tags").tagsinput("add", data.tags);
+            $("#porto_form").modal('show');
+        }).fail(function(data,textstatus,xhr){
+            alert('fail = ' + data + ', textstatus ' + textstatus );
+        })
+        ;
+
+    }
+
+    $("#portform_btnadd").click(function(){
+        $("#portfolio_id").val("");
+        $("#title").val("");
+        $("#description").val("");
+        $("#tags").tagsinput("removeAll");
+        $("#porto_form").modal('show');
+        return false;
+    });
+
+    $("#portform_btnsave").click(function(){
+        $.post(
+            "{{ url_for('portfolio.PortfolioView:add_update') }}",
+            $("#portform").serialize(),
+            function(data, textStatus) {
+                console.log(data)
+                var errors = $.parseJSON(data);
+
+
+                $("#error_title").text("");
+                $("#error_description").text("");
+                $("#error_tags").text("");
+
+                if(errors.iserror)
+                {
+                    console.log('set');
+                    if(errors.title!=undefined) $("#error_title").text(errors.title[0]);
+                    if(errors.description!=undefined) $("#error_description").text(errors.description[0]);
+                    if(errors.tags!=undefined) $("#error_tags").text(errors.tags[0]);
+                }else if (errors.savedsuccess)
+                {
+                    $("#porto_form").modal('hide');
+                    location.reload();
+                }
+            }
+        );
+    });
+
+
+</script>
+{% if session['signed'] and session['username']== user.username %}
+    <script src="/static/bootstrap3-editable/js/bootstrap-editable.min.js"></script>
+    <script>
+        $('#fullname').editable({
+            placement: "right",
+            error: function (errors) {
+            }
+        });
+        $('#tagline').editable({
+            placement: "right",            
+            error: function (errors) {                
+            }
+        });
+
+        $('#biography').editable({
+            placement:"right",
+            error: function (errors) {
+            }
+        });
+
+        function uploadAvatar(id)
+        {
+            $("#avatar_user_id").val(id);
+            $('#avatar_form').modal();
+        }
+
+        $(function () {
+            $('#upload-file-btn').click(function () {
+                var form_data = new FormData($('#upload-file')[0]);
+                form_data.append("avatar_user_id", $("avatar_user_id").val());
+                $.ajax({
+                    type: 'POST',
+                    url: "/biography/upload_avatar",
+                    data: form_data,
+                    contentType: false,
+                    cache: false,
+                    processData: false,
+                    async: false,
+                    success: function (data) {              
+                        $('#avatar_form').modal('hide');
+                        $("#avatar").attr("src", data);
+                    },
+                });
+            });
+        });
+    </script>
+
+
+{% endif %}
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends "base-layout.html" %}
+{% block content %}
+<style type="text/css">
+    header {    
+    background-image: url(404.jpg);    
+}
+</style>
+<header>
+        <div class="header-content">
+            <div class="header-content-inner">
+                <h1>Oops that page does not exist!!</h1>
+                <hr>
+                <div class="container">
+					<div clss="row">
+						<div class="col-md-3">&nbsp;</div>
+						<div class="col-md-2">
+							<a href="{{url_for('auth.AuthView:signup')}}" class="btn btn-info btn-xl">Sign Up</a>
+						</div>
+						<div class="col-md-2">&nbsp;</div>
+						<div class="col-md-2">
+							<a href="{{url_for('auth.AuthView:signin')}}" class="btn btn-success btn-xl">Sign In</a>
+						</div>
+						<div class="col-md-3">&nbsp;</div>
+					<div>
+				</div>
+            </div>
+        </div>
+</header>{% endblock %}

@@ -1,0 +1,288 @@
+<Item xmlns="http://webservices.amazon.com/AWSECommerceService/2013-08-01">
+  <ASIN>B00VGKN2N0</ASIN>
+  <ParentASIN>B016IQEVOU</ParentASIN>
+  <DetailPageURL>http://www.amazon.com/Apple-USB-Power-Adapter-iphone/dp/B00VGKN2N0%3Fpsc%3D1%26SubscriptionId%3DAKIAIRGYI76BYPQZXAQQ%26tag%3D273589934636%26linkCode%3Dxm2%26camp%3D2025%26creative%3D165953%26creativeASIN%3DB00VGKN2N0</DetailPageURL>
+  <ItemLinks>
+    <ItemLink>
+      <Description>Technical Details</Description>
+      <URL>http://www.amazon.com/Apple-USB-Power-Adapter-iphone/dp/tech-data/B00VGKN2N0%3FSubscriptionId%3DAKIAIRGYI76BYPQZXAQQ%26tag%3D273589934636%26linkCode%3Dxm2%26camp%3D2025%26creative%3D386001%26creativeASIN%3DB00VGKN2N0</URL>
+    </ItemLink>
+    <ItemLink>
+      <Description>Add To Baby Registry</Description>
+      <URL>http://www.amazon.com/gp/registry/baby/add-item.html%3Fasin.0%3DB00VGKN2N0%26SubscriptionId%3DAKIAIRGYI76BYPQZXAQQ%26tag%3D273589934636%26linkCode%3Dxm2%26camp%3D2025%26creative%3D386001%26creativeASIN%3DB00VGKN2N0</URL>
+    </ItemLink>
+    <ItemLink>
+      <Description>Add To Wedding Registry</Description>
+      <URL>http://www.amazon.com/gp/registry/wedding/add-item.html%3Fasin.0%3DB00VGKN2N0%26SubscriptionId%3DAKIAIRGYI76BYPQZXAQQ%26tag%3D273589934636%26linkCode%3Dxm2%26camp%3D2025%26creative%3D386001%26creativeASIN%3DB00VGKN2N0</URL>
+    </ItemLink>
+    <ItemLink>
+      <Description>Add To Wishlist</Description>
+      <URL>http://www.amazon.com/gp/registry/wishlist/add-item.html%3Fasin.0%3DB00VGKN2N0%26SubscriptionId%3DAKIAIRGYI76BYPQZXAQQ%26tag%3D273589934636%26linkCode%3Dxm2%26camp%3D2025%26creative%3D386001%26creativeASIN%3DB00VGKN2N0</URL>
+    </ItemLink>
+    <ItemLink>
+      <Description>Tell A Friend</Description>
+      <URL>http://www.amazon.com/gp/pdp/taf/B00VGKN2N0%3FSubscriptionId%3DAKIAIRGYI76BYPQZXAQQ%26tag%3D273589934636%26linkCode%3Dxm2%26camp%3D2025%26creative%3D386001%26creativeASIN%3DB00VGKN2N0</URL>
+    </ItemLink>
+    <ItemLink>
+      <Description>All Customer Reviews</Description>
+      <URL>http://www.amazon.com/review/product/B00VGKN2N0%3FSubscriptionId%3DAKIAIRGYI76BYPQZXAQQ%26tag%3D273589934636%26linkCode%3Dxm2%26camp%3D2025%26creative%3D386001%26creativeASIN%3DB00VGKN2N0</URL>
+    </ItemLink>
+    <ItemLink>
+      <Description>All Offers</Description>
+      <URL>http://www.amazon.com/gp/offer-listing/B00VGKN2N0%3FSubscriptionId%3DAKIAIRGYI76BYPQZXAQQ%26tag%3D273589934636%26linkCode%3Dxm2%26camp%3D2025%26creative%3D386001%26creativeASIN%3DB00VGKN2N0</URL>
+    </ItemLink>
+  </ItemLinks>
+  <SmallImage>
+    <URL>http://ecx.images-amazon.com/images/I/41b3TMvpaZL._SL75_.jpg</URL>
+    <Height Units="pixels">75</Height>
+    <Width Units="pixels">75</Width>
+  </SmallImage>
+  <MediumImage>
+    <URL>http://ecx.images-amazon.com/images/I/41b3TMvpaZL._SL160_.jpg</URL>
+    <Height Units="pixels">159</Height>
+    <Width Units="pixels">160</Width>
+  </MediumImage>
+  <LargeImage>
+    <URL>http://ecx.images-amazon.com/images/I/41b3TMvpaZL.jpg</URL>
+    <Height Units="pixels">497</Height>
+    <Width Units="pixels">500</Width>
+  </LargeImage>
+  <ImageSets>
+    <ImageSet Category="variant">
+      <SwatchImage>
+        <URL>http://ecx.images-amazon.com/images/I/41GZUOtFSUL._SL30_.jpg</URL>
+        <Height Units="pixels">28</Height>
+        <Width Units="pixels">30</Width>
+      </SwatchImage>
+      <SmallImage>
+        <URL>http://ecx.images-amazon.com/images/I/41GZUOtFSUL._SL75_.jpg</URL>
+        <Height Units="pixels">69</Height>
+        <Width Units="pixels">75</Width>
+      </SmallImage>
+      <ThumbnailImage>
+        <URL>http://ecx.images-amazon.com/images/I/41GZUOtFSUL._SL75_.jpg</URL>
+        <Height Units="pixels">69</Height>
+        <Width Units="pixels">75</Width>
+      </ThumbnailImage>
+      <TinyImage>
+        <URL>http://ecx.images-amazon.com/images/I/41GZUOtFSUL._SL110_.jpg</URL>
+        <Height Units="pixels">101</Height>
+        <Width Units="pixels">110</Width>
+      </TinyImage>
+      <MediumImage>
+        <URL>http://ecx.images-amazon.com/images/I/41GZUOtFSUL._SL160_.jpg</URL>
+        <Height Units="pixels">147</Height>
+        <Width Units="pixels">160</Width>
+      </MediumImage>
+      <LargeImage>
+        <URL>http://ecx.images-amazon.com/images/I/41GZUOtFSUL.jpg</URL>
+        <Height Units="pixels">459</Height>
+        <Width Units="pixels">500</Width>
+      </LargeImage>
+      <HiResImage>
+        <URL>http://ecx.images-amazon.com/images/I/61dpNHAKQ5L.jpg</URL>
+        <Height Units="pixels">1078</Height>
+        <Width Units="pixels">1174</Width>
+      </HiResImage>
+    </ImageSet>
+    <ImageSet Category="primary">
+      <SwatchImage>
+        <URL>http://ecx.images-amazon.com/images/I/41b3TMvpaZL._SL30_.jpg</URL>
+        <Height Units="pixels">30</Height>
+        <Width Units="pixels">30</Width>
+      </SwatchImage>
+      <SmallImage>
+        <URL>http://ecx.images-amazon.com/images/I/41b3TMvpaZL._SL75_.jpg</URL>
+        <Height Units="pixels">75</Height>
+        <Width Units="pixels">75</Width>
+      </SmallImage>
+      <ThumbnailImage>
+        <URL>http://ecx.images-amazon.com/images/I/41b3TMvpaZL._SL75_.jpg</URL>
+        <Height Units="pixels">75</Height>
+        <Width Units="pixels">75</Width>
+      </ThumbnailImage>
+      <TinyImage>
+        <URL>http://ecx.images-amazon.com/images/I/41b3TMvpaZL._SL110_.jpg</URL>
+        <Height Units="pixels">109</Height>
+        <Width Units="pixels">110</Width>
+      </TinyImage>
+      <MediumImage>
+        <URL>http://ecx.images-amazon.com/images/I/41b3TMvpaZL._SL160_.jpg</URL>
+        <Height Units="pixels">159</Height>
+        <Width Units="pixels">160</Width>
+      </MediumImage>
+      <LargeImage>
+        <URL>http://ecx.images-amazon.com/images/I/41b3TMvpaZL.jpg</URL>
+        <Height Units="pixels">497</Height>
+        <Width Units="pixels">500</Width>
+      </LargeImage>
+      <HiResImage>
+        <URL>http://ecx.images-amazon.com/images/I/613tLJ2tE7L.jpg</URL>
+        <Height Units="pixels">1088</Height>
+        <Width Units="pixels">1094</Width>
+      </HiResImage>
+    </ImageSet>
+  </ImageSets>
+  <ItemAttributes>
+    <Binding>Wireless Phone Accessory</Binding>
+    <Brand>Apple</Brand>
+    <Color>Apple 5W</Color>
+    <Department>Cell Phones &amp; Accessories</Department>
+    <EAN>8544121444456</EAN>
+    <EANList>
+      <EANListElement>8544121444456</EANListElement>
+    </EANList>
+    <Feature>5W USB POWER ADAPTER</Feature>
+    <ItemDimensions>
+      <Height Units="hundredths-inches">100</Height>
+      <Length Units="hundredths-inches">100</Length>
+      <Width Units="hundredths-inches">200</Width>
+    </ItemDimensions>
+    <Label>APPLE</Label>
+    <Manufacturer>APPLE</Manufacturer>
+    <Model>3312509</Model>
+    <MPN>3312509</MPN>
+    <PackageDimensions>
+      <Height Units="hundredths-inches">30</Height>
+      <Length Units="hundredths-inches">350</Length>
+      <Weight Units="hundredths-pounds">15</Weight>
+      <Width Units="hundredths-inches">200</Width>
+    </PackageDimensions>
+    <PackageQuantity>1</PackageQuantity>
+    <PartNumber>3312509</PartNumber>
+    <ProductGroup>Wireless</ProductGroup>
+    <ProductTypeName>WIRELESS_ACCESSORY</ProductTypeName>
+    <Publisher>APPLE</Publisher>
+    <Studio>APPLE</Studio>
+    <Title>Apple 5W USB Power Adapter for iphone 6</Title>
+  </ItemAttributes>
+  <OfferSummary>
+    <LowestNewPrice>
+      <Amount>250</Amount>
+      <CurrencyCode>USD</CurrencyCode>
+      <FormattedPrice>$2.50</FormattedPrice>
+    </LowestNewPrice>
+    <LowestUsedPrice>
+      <Amount>299</Amount>
+      <CurrencyCode>USD</CurrencyCode>
+      <FormattedPrice>$2.99</FormattedPrice>
+    </LowestUsedPrice>
+    <LowestRefurbishedPrice>
+      <Amount>499</Amount>
+      <CurrencyCode>USD</CurrencyCode>
+      <FormattedPrice>$4.99</FormattedPrice>
+    </LowestRefurbishedPrice>
+    <TotalNew>34</TotalNew>
+    <TotalUsed>3</TotalUsed>
+    <TotalCollectible>0</TotalCollectible>
+    <TotalRefurbished>1</TotalRefurbished>
+  </OfferSummary>
+  <Offers>
+    <TotalOffers>1</TotalOffers>
+    <TotalOfferPages>1</TotalOfferPages>
+    <MoreOffersUrl>http://www.amazon.com/gp/offer-listing/B00VGKN2N0%3FSubscriptionId%3DAKIAIRGYI76BYPQZXAQQ%26tag%3D273589934636%26linkCode%3Dxm2%26camp%3D2025%26creative%3D386001%26creativeASIN%3DB00VGKN2N0</MoreOffersUrl>
+    <Offer>
+      <OfferAttributes>
+        <Condition>New</Condition>
+      </OfferAttributes>
+      <OfferListing>
+        <OfferListingId>G0AP8RNYwzifpnu9VxqucOonRHyqohwmP6B1qza9xrXlhD2VNXOVSwN2KuaFlGVLUaJvfihAngr3n57HcJUNyKUUS6j6AxZCncc%2B2DrXhV7Ku7chkXhsoqLjGcOUX4FiEAWTRXlPv1GQnuYAGjJH%2Fuk5To6OrPME</OfferListingId>
+        <Price>
+          <Amount>678</Amount>
+          <CurrencyCode>USD</CurrencyCode>
+          <FormattedPrice>$6.78</FormattedPrice>
+        </Price>
+        <Availability>Usually ships in 24 hours</Availability>
+        <AvailabilityAttributes>
+          <AvailabilityType>now</AvailabilityType>
+          <MinimumHours>0</MinimumHours>
+          <MaximumHours>0</MaximumHours>
+        </AvailabilityAttributes>
+        <IsEligibleForSuperSaverShipping>1</IsEligibleForSuperSaverShipping>
+        <IsEligibleForPrime>1</IsEligibleForPrime>
+      </OfferListing>
+    </Offer>
+  </Offers>
+  <CustomerReviews>
+    <IFrameURL>http://www.amazon.com/reviews/iframe?akid=AKIAIRGYI76BYPQZXAQQ&amp;alinkCode=xm2&amp;asin=B00VGKN2N0&amp;atag=273589934636&amp;exp=2016-03-12T00%3A56%3A07Z&amp;v=2&amp;sig=Z4YNgUYd4hXsC6MLjd21GOykgsVb%2BTxa7eyvoNE1yX8%3D</IFrameURL>
+    <HasReviews>true</HasReviews>
+  </CustomerReviews>
+  <EditorialReviews>
+    <EditorialReview>
+      <Source>Product Description</Source>
+      <Content>Home charger adapter allows charging at home or in the office via USB cable connection. Simply plug in the USB cable, and plug the adapter into the wall.</Content>
+      <IsLinkSuppressed>0</IsLinkSuppressed>
+    </EditorialReview>
+  </EditorialReviews>
+  <SimilarProducts>
+    <SimilarProduct>
+      <ASIN>B010S9N6OO</ASIN>
+      <Title>AmazonBasics Apple Certified Lightning to USB Cable - 6 Feet (1.8 Meters) - White</Title>
+    </SimilarProduct>
+    <SimilarProduct>
+      <ASIN>B00A83I8G2</ASIN>
+      <Title>Apple 12W USB Power Adapter</Title>
+    </SimilarProduct>
+    <SimilarProduct>
+      <ASIN>B010NYA6VK</ASIN>
+      <Title>100% Apple Authentic USB Adapter for iPhone 4/4s/5/5c/5s/6/6c/ 6 plus /iPad Mini/ iPod Touch</Title>
+    </SimilarProduct>
+    <SimilarProduct>
+      <ASIN>B014LFT8H0</ASIN>
+      <Title>Apple MD819AM/A 2 Meter Lightning to USB Cable</Title>
+    </SimilarProduct>
+  </SimilarProducts>
+  <BrowseNodes>
+    <BrowseNode>
+      <BrowseNodeId>464394</BrowseNodeId>
+      <Name>USB Cables</Name>
+      <Ancestors>
+        <BrowseNode>
+          <BrowseNodeId>172463</BrowseNodeId>
+          <Name>Cables &amp; Interconnects</Name>
+          <Ancestors>
+            <BrowseNode>
+              <BrowseNodeId>172456</BrowseNodeId>
+              <Name>Computer Accessories &amp; Peripherals</Name>
+              <Ancestors>
+                <BrowseNode>
+                  <BrowseNodeId>541966</BrowseNodeId>
+                  <Name>Computers &amp; Accessories</Name>
+                  <Ancestors>
+                    <BrowseNode>
+                      <BrowseNodeId>493964</BrowseNodeId>
+                      <Name>Categories</Name>
+                      <IsCategoryRoot>1</IsCategoryRoot>
+                      <Ancestors>
+                        <BrowseNode>
+                          <BrowseNodeId>172282</BrowseNodeId>
+                          <Name>Electronics</Name>
+                        </BrowseNode>
+                      </Ancestors>
+                    </BrowseNode>
+                  </Ancestors>
+                </BrowseNode>
+              </Ancestors>
+            </BrowseNode>
+          </Ancestors>
+        </BrowseNode>
+      </Ancestors>
+    </BrowseNode>
+    <BrowseNode>
+      <BrowseNodeId>13900871</BrowseNodeId>
+      <Name>Computers Features</Name>
+      <Children>
+        <BrowseNode>
+          <BrowseNodeId>51548011</BrowseNodeId>
+          <Name>Featured Categories</Name>
+        </BrowseNode>
+      </Children>
+      <Ancestors>
+        <BrowseNode>
+          <BrowseNodeId>172282</BrowseNodeId>
+          <Name>Electronics</Name>
+        </BrowseNode>
+      </Ancestors>
+    </BrowseNode>
+  </BrowseNodes>
+</Item>

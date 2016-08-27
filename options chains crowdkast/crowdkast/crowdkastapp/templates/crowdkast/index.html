@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+<html>
+    <head>
+
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>Crowdkast</title>
+        <!-- Mainly scripts -->
+        <script src="{{url_for("profile.static",filename="js/jquery-2.1.1.js")}}"></script>
+        <script src="{{url_for("profile.static",filename="js/bootstrap.min.js")}}"></script>
+
+        <script src="{{url_for("profile.static",filename="js/plugins/nouslider/jquery.nouislider.min.js")}}"></script>
+        <!-- FooTable -->
+        <script src="{{url_for("profile.static",filename="js/plugins/footable/footable.all.min.js")}}"></script>
+
+        <script src="{{url_for("profile.static",filename="js/plugins/datapicker/bootstrap-datepicker.js")}}"></script>
+        <link href="{{url_for("profile.static",filename="css/bootstrap.min.css")}}" rel="stylesheet">
+        <link href="{{url_for("profile.static",filename="font-awesome/css/font-awesome.css")}}" rel="stylesheet">
+        <link href="{{url_for("profile.static",filename="css/plugins/footable/footable.core.css")}}" rel="stylesheet">
+        <link href="{{url_for("profile.static",filename="css/plugins/datapicker/bootstrap-datepicker3.css")}}" rel="stylesheet">
+        <link href="{{url_for("profile.static",filename="css/plugins/nouslider/jquery.nouislider.css")}}" rel="stylesheet">
+        <link href="{{url_for("profile.static",filename="css/style.css")}}" rel="stylesheet">
+
+    </head>
+
+    <body>
+
+        <div id="wrapper">
+            <div id="page-wrapper" class="gray-bg">
+                <div class="row wrapper border-bottom white-bg page-heading">
+                    <div class="col-lg-1 col-md-1 col-sm-1 col-md-offset-1 logo-head">
+                        <h4>CROWDKAST</h4>
+                    </div>
+                    <div class="col-lg-8 col-md-8 col-sm-8 top-bar crowdkast">
+                        <ol class="menu">
+                            <li><a href="index-2.html">About</a></li>
+                            <li><a href="index-2.html">Data</a></li>
+                            <li><a href="index-2.html">Licencing</a></li>
+                        </ol>
+                    </div>
+                    <div class="col-lg-2 col-md-2 col-sm-2  top-bar crowdkast">
+                        <img src="{{url_for("profile.static",filename="img/a4.jpg")}}" width="50" height="50" class="img-circle"/>
+                        <div class="dropdown profile-element codekast"> 
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+                                <span class="clear">  <span class="text-muted text-xs block codekast">John Smith <b class="caret"></b></span> </span> </a>
+                            <ul class="dropdown-menu animated fadeInRight m-t-xs">
+                                <li><a href="profile.html">Profile</a></li>
+                                <li><a href="contacts.html">Contacts</a></li>
+                                <li><a href="mailbox.html">Mailbox</a></li>
+                                <li class="divider"></li>
+                                <li><a href="login.html">Logout</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="wrapper wrapper-content animated fadeInRight">
+                    <div class="row margin-bottom-10">
+                        <div class="col-lg-4">
+                            <div class="ibox-content custom">
+                                <div class="col-lg-4 col-xs-4">
+                                    <img src="{{url_for("profile.static",filename="img/apple.jpg")}}" height="65" width="100"/>
+                                </div>
+                                <div class="col-lg-8 col-xs-8 block-2">
+                                    <h2>AAPL</h2>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="ibox-content custom" style="text-align: center">
+                                <h2><b>$97.00</b></h2>
+                                <small>Crowdkast Target Price</small>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="ibox float-e-margins">
+                                <div class="ibox-content custom">
+                                    <form role="form" class="form-inline">
+                                        <div class="form-group codekast-form">
+                                            <input type="text" placeholder="FSLR" id="fslr" class="form-control">
+                                            <button class="btn btn-blue" type="submit">Get Quote</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row margin-bottom-20">
+                        <div class="col-lg-12">
+                            <div class="ibox-content custom-2" style="text-align: center">
+                                <div class="col-lg-6">
+                                    <div class="row number-row">
+                                        <div class="col-lg-6"><h2><b>Apple Inc. (AAPL)</b></h2></div>
+                                        <div class="col-lg-6 watchlist">
+                                            <i class="fa fa-star-o"></i>
+                                            <label>Watchlist</label>
+                                        </div>
+                                        <div class="col-lg-6 watchlist">
+                                            <i class="fa fa-star-o"></i>
+                                            <label>Portfolio</label>
+                                        </div>
+                                    </div>
+                                    <div class="row number-row">
+                                        <div class="col-lg-3 gray">118.23</div>
+                                        <div class="col-lg-3 red">0.05 (0.04%)</div>
+                                        <div class="col-lg-6 normal">NASDAQ - As of 4:00 PM EDT</div>
+                                    </div>
+                                    <div class="row number-row">
+                                        <div class="col-lg-6 normal">After hours: 630.20</div>
+                                        <div class="col-lg-6 normal green"><i class="fa fa-caret-up"></i>+0.95 (0.15%) 7:58 EDT</div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="row number-row">
+                                        <div class="col-lg-8">
+                                            <form class="form-inline" role="form">
+                                                <div class="form-group codekast-form">
+                                                    <input type="text" class="form-control" id="target_price" placeholder="Target Price">
+                                                    <button type="submit" class="btn btn-blue">UPDATE</button>
+                                                </div>
+                                            </form>
+                                        </div>
+										<div class="col-lg-3">
+											<div id="risk_slider"></div>
+										</div>
+										<div class="col-lg-1">
+											<span class="badge badge-success ">Risk<br/> <span class="risk_count">20%</span></span>
+										</div>
+                                    </div>
+                                    <div class="row number-row">
+                                        <div class="col-lg-4 normal">
+                                            <input type="radio" name="duration"/>
+                                            3 Months
+                                        </div>
+                                        <div class="col-lg-4 normal">
+                                            <input type="radio"  name="duration" checked/>
+                                            6 Months
+                                        </div>
+                                        <div class="col-lg-4 normal">
+                                            <input type="radio"  name="duration"/>
+                                            1 Year
+                                        </div>
+                                    </div>
+                                    <div class="row number-row">
+                                        <div class="col-lg-4 normal">
+                                            Contract Length
+                                        </div>
+                                        <div class="col-lg-2 normal">
+                                            <input type="checkbox" /><br/>
+                                            Weekly
+                                        </div>
+                                        <div class="col-lg-2 normal">
+                                            <input type="checkbox" /><br/>
+                                            Monthly
+                                        </div>
+                                        <div class="col-lg-2 normal">
+                                            <input type="checkbox" /><br/>
+                                            3 Months
+                                        </div>
+                                        <div class="col-lg-2 normal">
+                                            <input type="checkbox" /><br/>
+                                            6 Months
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row margin-bottom-20">
+                        <div class="col-lg-4">
+                            <button class="btn btn-blue  col-lg-12 tabBtn" id="optionChain">Option Chain</button>
+                        </div>
+                        <div class="col-lg-4">
+                            <button class="btn btn-white col-lg-12 tabBtn" id="coveredCallWriter">Covered Call Writer</button>
+                        </div>
+                    </div>   
+                    <div class="row toggleContent" id="coveredCallWriterContent" style="display: none;">
+                        <div class="col-lg-12">
+                            <div class="ibox float-e-margins codekast">
+                                <table data-page-size="8" class="footable table table-stripped toggle-arrow-tiny codekast no-paging footable-loaded">
+                                    <thead class="codekast">
+                                        <tr>
+                                            <th data-toggle="true" class="footable-sortable">Stock Ticker<span class="footable-sort-indicator"></span></th>
+                                            <th class="footable-sortable">Company Name<span class="footable-sort-indicator"></span></th>
+                                            <th class="footable-sortable">Current Daily<span class="footable-sort-indicator"></span></th>
+                                            <th class="footable-sortable">%Change<span class="footable-sort-indicator"></span></th>
+                                            <th class="footable-sortable">Volatality<span class="footable-sort-indicator"></span></th>
+                                            <th class="footable-sortable">&nbsp;</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="codekast">
+                                        <tr style="display: table-row;" class="footable-even three-rows-clickable">
+                                            <td><span class="footable-toggle"></span>AAPL</td>
+                                            <td>Apple Inc.</td>
+                                            <td>0.00 %</td>
+                                            <td>0.00 %</td>
+                                            <td><div class="basic_slider_row"></div></td>
+                                            <td><span class="badge badge-success row_count">20%</span></td>
+                                        </tr>
+                                        <tr style="display:none;">
+                                            <td colspan="6" style="padding:0px">
+                                                <table data-page-size="8" class="footable table-stripped toggle-arrow-tiny codekast no-paging footable-loaded">
+                                                    <tbody class="codekast">
+                                                        <tr class="footable-row-detail success">
+                                                            <td class="footable-row-detail-cell" colspan="11">
+                                                                <div class="footable-row-detail-inner">
+                                                                    <div class="footable-row-detail-row">
+                                                                        <div class="footable-row-detail-name">Contract Name:</div>
+                                                                        <div class="footable-row-detail-value">AAPL159897</div>
+                                                                    </div>
+                                                                    <div class="footable-row-detail-row">
+                                                                        <div class="footable-row-detail-name">Bid</div>
+                                                                        <div class="footable-row-detail-value">0.00</div>
+                                                                    </div>
+                                                                    <div class="footable-row-detail-row">
+                                                                        <div class="footable-row-detail-name">Ask</div>
+                                                                        <div class="footable-row-detail-value">0.00</div>
+                                                                    </div>
+                                                                    <div class="footable-row-detail-row">
+                                                                        <div class="footable-row-detail-name">% Expire OTM</div>
+                                                                        <div class="footable-row-detail-value">0.00%</div>
+                                                                    </div>
+                                                                    <div class="footable-row-detail-row">
+                                                                        <div class="footable-row-detail-name">Expected Profit Name:</div>
+                                                                        <div class="footable-row-detail-value">500.00</div>
+                                                                    </div>
+                                                                    <div class="footable-row-detail-row">
+                                                                        <div class="footable-row-detail-name">P/L</div>
+                                                                        <div class="footable-row-detail-value">500.00</div>
+                                                                    </div>
+                                                                    <div class="footable-row-detail-row">
+                                                                        <div class="footable-row-detail-name">Time Till Expiration</div>
+                                                                        <div class="footable-row-detail-value">12:48:54</div>
+                                                                    </div>
+                                                                    <div class="footable-row-detail-row">
+                                                                        <div class="footable-row-detail-name"><a class="btn btn-blue track_btn">TRACK</a></div>
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr class="footable-row-detail success">
+                                                            <td class="footable-row-detail-cell" colspan="11">
+                                                                <div class="footable-row-detail-inner">
+                                                                    <div class="footable-row-detail-row">
+                                                                        <div class="footable-row-detail-name">Contract Name:</div>
+                                                                        <div class="footable-row-detail-value">AAPL159897</div>
+                                                                    </div>
+                                                                    <div class="footable-row-detail-row">
+                                                                        <div class="footable-row-detail-name">Bid</div>
+                                                                        <div class="footable-row-detail-value">0.00</div>
+                                                                    </div>
+                                                                    <div class="footable-row-detail-row">
+                                                                        <div class="footable-row-detail-name">Ask</div>
+                                                                        <div class="footable-row-detail-value">0.00</div>
+                                                                    </div>
+                                                                    <div class="footable-row-detail-row">
+                                                                        <div class="footable-row-detail-name">% Expire OTM</div>
+                                                                        <div class="footable-row-detail-value">0.00%</div>
+                                                                    </div>
+                                                                    <div class="footable-row-detail-row">
+                                                                        <div class="footable-row-detail-name">Expected Profit Name:</div>
+                                                                        <div class="footable-row-detail-value">500.00</div>
+                                                                    </div>
+                                                                    <div class="footable-row-detail-row">
+                                                                        <div class="footable-row-detail-name">P/L</div>
+                                                                        <div class="footable-row-detail-value">500.00</div>
+                                                                    </div>
+                                                                    <div class="footable-row-detail-row">
+                                                                        <div class="footable-row-detail-name">Time Till Expiration</div>
+                                                                        <div class="footable-row-detail-value">12:48:54</div>
+                                                                    </div>
+                                                                    <div class="footable-row-detail-row">
+                                                                        <div class="footable-row-detail-name"><a class="btn btn-blue track_btn">TRACK</a></div>
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr class="footable-row-detail success">
+                                                            <td class="footable-row-detail-cell" colspan="11">
+                                                                <div class="footable-row-detail-inner">
+                                                                    <div class="footable-row-detail-row">
+                                                                        <div class="footable-row-detail-name">Contract Name:</div>
+                                                                        <div class="footable-row-detail-value">AAPL159897</div>
+                                                                    </div>
+                                                                    <div class="footable-row-detail-row">
+                                                                        <div class="footable-row-detail-name">Bid</div>
+                                                                        <div class="footable-row-detail-value">0.00</div>
+                                                                    </div>
+                                                                    <div class="footable-row-detail-row">
+                                                                        <div class="footable-row-detail-name">Ask</div>
+                                                                        <div class="footable-row-detail-value">0.00</div>
+                                                                    </div>
+                                                                    <div class="footable-row-detail-row">
+                                                                        <div class="footable-row-detail-name">% Expire OTM</div>
+                                                                        <div class="footable-row-detail-value">0.00%</div>
+                                                                    </div>
+                                                                    <div class="footable-row-detail-row">
+                                                                        <div class="footable-row-detail-name">Expected Profit Name:</div>
+                                                                        <div class="footable-row-detail-value">500.00</div>
+                                                                    </div>
+                                                                    <div class="footable-row-detail-row">
+                                                                        <div class="footable-row-detail-name">P/L</div>
+                                                                        <div class="footable-row-detail-value">500.00</div>
+                                                                    </div>
+                                                                    <div class="footable-row-detail-row">
+                                                                        <div class="footable-row-detail-name">Time Till Expiration</div>
+                                                                        <div class="footable-row-detail-value">12:48:54</div>
+                                                                    </div>
+                                                                    <div class="footable-row-detail-row">
+                                                                        <div class="footable-row-detail-name"><a class="btn btn-blue track_btn">TRACK</a></div>
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+
+                                                    </tbody>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                        <tr style="display: table-row;" class="footable-even three-rows-clickable">
+                                            <td><span class="footable-toggle"></span>AAPL</td>
+                                            <td>Apple Inc.</td>
+                                            <td>0.00 %</td>
+                                            <td>0.00 %</td>
+                                            <td><div class="basic_slider_row"></div></td>
+                                            <td><span class="badge badge-success row_count">20%</span></td>
+                                        </tr>
+                                        <tr style="display:none;">
+                                            <td colspan="6" style="padding:0px">
+                                                <table data-page-size="8" class="footable table-stripped toggle-arrow-tiny codekast no-paging footable-loaded">
+                                                    <tbody class="codekast">
+                                                        <tr class="footable-row-detail success">
+                                                            <td class="footable-row-detail-cell" colspan="11">
+                                                                <div class="footable-row-detail-inner">
+                                                                    <div class="footable-row-detail-row">
+                                                                        <div class="footable-row-detail-name">Contract Name:</div>
+                                                                        <div class="footable-row-detail-value">AAPL159897</div>
+                                                                    </div>
+                                                                    <div class="footable-row-detail-row">
+                                                                        <div class="footable-row-detail-name">Bid</div>
+                                                                        <div class="footable-row-detail-value">0.00</div>
+                                                                    </div>
+                                                                    <div class="footable-row-detail-row">
+                                                                        <div class="footable-row-detail-name">Ask</div>
+                                                                        <div class="footable-row-detail-value">0.00</div>
+                                                                    </div>
+                                                                    <div class="footable-row-detail-row">
+                                                                        <div class="footable-row-detail-name">% Expire OTM</div>
+                                                                        <div class="footable-row-detail-value">0.00%</div>
+                                                                    </div>
+                                                                    <div class="footable-row-detail-row">
+                                                                        <div class="footable-row-detail-name">Expected Profit Name:</div>
+                                                                        <div class="footable-row-detail-value">500.00</div>
+                                                                    </div>
+                                                                    <div class="footable-row-detail-row">
+                                                                        <div class="footable-row-detail-name">P/L</div>
+                                                                        <div class="footable-row-detail-value">500.00</div>
+                                                                    </div>
+                                                                    <div class="footable-row-detail-row">
+                                                                        <div class="footable-row-detail-name">Time Till Expiration</div>
+                                                                        <div class="footable-row-detail-value">12:48:54</div>
+                                                                    </div>
+                                                                    <div class="footable-row-detail-row">
+                                                                        <div class="footable-row-detail-name"><a class="btn btn-blue track_btn">TRACK</a></div>
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr class="footable-row-detail success">
+                                                            <td class="footable-row-detail-cell" colspan="11">
+                                                                <div class="footable-row-detail-inner">
+                                                                    <div class="footable-row-detail-row">
+                                                                        <div class="footable-row-detail-name">Contract Name:</div>
+                                                                        <div class="footable-row-detail-value">AAPL159897</div>
+                                                                    </div>
+                                                                    <div class="footable-row-detail-row">
+                                                                        <div class="footable-row-detail-name">Bid</div>
+                                                                        <div class="footable-row-detail-value">0.00</div>
+                                                                    </div>
+                                                                    <div class="footable-row-detail-row">
+                                                                        <div class="footable-row-detail-name">Ask</div>
+                                                                        <div class="footable-row-detail-value">0.00</div>
+                                                                    </div>
+                                                                    <div class="footable-row-detail-row">
+                                                                        <div class="footable-row-detail-name">% Expire OTM</div>
+                                                                        <div class="footable-row-detail-value">0.00%</div>
+                                                                    </div>
+                                                                    <div class="footable-row-detail-row">
+                                                                        <div class="footable-row-detail-name">Expected Profit Name:</div>
+                                                                        <div class="footable-row-detail-value">500.00</div>
+                                                                    </div>
+                                                                    <div class="footable-row-detail-row">
+                                                                        <div class="footable-row-detail-name">P/L</div>
+                                                                        <div class="footable-row-detail-value">500.00</div>
+                                                                    </div>
+                                                                    <div class="footable-row-detail-row">
+                                                                        <div class="footable-row-detail-name">Time Till Expiration</div>
+                                                                        <div class="footable-row-detail-value">12:48:54</div>
+                                                                    </div>
+                                                                    <div class="footable-row-detail-row">
+                                                                        <div class="footable-row-detail-name"><a class="btn btn-blue track_btn">TRACK</a></div>
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr class="footable-row-detail success">
+                                                            <td class="footable-row-detail-cell" colspan="11">
+                                                                <div class="footable-row-detail-inner">
+                                                                    <div class="footable-row-detail-row">
+                                                                        <div class="footable-row-detail-name">Contract Name:</div>
+                                                                        <div class="footable-row-detail-value">AAPL159897</div>
+                                                                    </div>
+                                                                    <div class="footable-row-detail-row">
+                                                                        <div class="footable-row-detail-name">Bid</div>
+                                                                        <div class="footable-row-detail-value">0.00</div>
+                                                                    </div>
+                                                                    <div class="footable-row-detail-row">
+                                                                        <div class="footable-row-detail-name">Ask</div>
+                                                                        <div class="footable-row-detail-value">0.00</div>
+                                                                    </div>
+                                                                    <div class="footable-row-detail-row">
+                                                                        <div class="footable-row-detail-name">% Expire OTM</div>
+                                                                        <div class="footable-row-detail-value">0.00%</div>
+                                                                    </div>
+                                                                    <div class="footable-row-detail-row">
+                                                                        <div class="footable-row-detail-name">Expected Profit Name:</div>
+                                                                        <div class="footable-row-detail-value">500.00</div>
+                                                                    </div>
+                                                                    <div class="footable-row-detail-row">
+                                                                        <div class="footable-row-detail-name">P/L</div>
+                                                                        <div class="footable-row-detail-value">500.00</div>
+                                                                    </div>
+                                                                    <div class="footable-row-detail-row">
+                                                                        <div class="footable-row-detail-name">Time Till Expiration</div>
+                                                                        <div class="footable-row-detail-value">12:48:54</div>
+                                                                    </div>
+                                                                    <div class="footable-row-detail-row">
+                                                                        <div class="footable-row-detail-name"><a class="btn btn-blue track_btn">TRACK</a></div>
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+
+                                                    </tbody>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                        <tr style="display: table-row;" class="footable-even three-rows-clickable">
+                                            <td><span class="footable-toggle"></span>AAPL</td>
+                                            <td>Apple Inc.</td>
+                                            <td>0.00 %</td>
+                                            <td>0.00 %</td>
+                                            <td><div class="basic_slider_row"></div></td>
+                                            <td><span class="badge badge-success row_count">20%</span></td>
+                                        </tr>
+                                        <tr style="display:none;">
+                                            <td colspan="6" style="padding:0px">
+                                                <table data-page-size="8" class="footable table-stripped toggle-arrow-tiny codekast no-paging footable-loaded">
+                                                    <tbody class="codekast">
+                                                        <tr class="footable-row-detail success">
+                                                            <td class="footable-row-detail-cell" colspan="11">
+                                                                <div class="footable-row-detail-inner">
+                                                                    <div class="footable-row-detail-row">
+                                                                        <div class="footable-row-detail-name">Contract Name:</div>
+                                                                        <div class="footable-row-detail-value">AAPL159897</div>
+                                                                    </div>
+                                                                    <div class="footable-row-detail-row">
+                                                                        <div class="footable-row-detail-name">Bid</div>
+                                                                        <div class="footable-row-detail-value">0.00</div>
+                                                                    </div>
+                                                                    <div class="footable-row-detail-row">
+                                                                        <div class="footable-row-detail-name">Ask</div>
+                                                                        <div class="footable-row-detail-value">0.00</div>
+                                                                    </div>
+                                                                    <div class="footable-row-detail-row">
+                                                                        <div class="footable-row-detail-name">% Expire OTM</div>
+                                                                        <div class="footable-row-detail-value">0.00%</div>
+                                                                    </div>
+                                                                    <div class="footable-row-detail-row">
+                                                                        <div class="footable-row-detail-name">Expected Profit Name:</div>
+                                                                        <div class="footable-row-detail-value">500.00</div>
+                                                                    </div>
+                                                                    <div class="footable-row-detail-row">
+                                                                        <div class="footable-row-detail-name">P/L</div>
+                                                                        <div class="footable-row-detail-value">500.00</div>
+                                                                    </div>
+                                                                    <div class="footable-row-detail-row">
+                                                                        <div class="footable-row-detail-name">Time Till Expiration</div>
+                                                                        <div class="footable-row-detail-value">12:48:54</div>
+                                                                    </div>
+                                                                    <div class="footable-row-detail-row">
+                                                                        <div class="footable-row-detail-name"><a class="btn btn-blue track_btn">TRACK</a></div>
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr class="footable-row-detail success">
+                                                            <td class="footable-row-detail-cell" colspan="11">
+                                                                <div class="footable-row-detail-inner">
+                                                                    <div class="footable-row-detail-row">
+                                                                        <div class="footable-row-detail-name">Contract Name:</div>
+                                                                        <div class="footable-row-detail-value">AAPL159897</div>
+                                                                    </div>
+                                                                    <div class="footable-row-detail-row">
+                                                                        <div class="footable-row-detail-name">Bid</div>
+                                                                        <div class="footable-row-detail-value">0.00</div>
+                                                                    </div>
+                                                                    <div class="footable-row-detail-row">
+                                                                        <div class="footable-row-detail-name">Ask</div>
+                                                                        <div class="footable-row-detail-value">0.00</div>
+                                                                    </div>
+                                                                    <div class="footable-row-detail-row">
+                                                                        <div class="footable-row-detail-name">% Expire OTM</div>
+                                                                        <div class="footable-row-detail-value">0.00%</div>
+                                                                    </div>
+                                                                    <div class="footable-row-detail-row">
+                                                                        <div class="footable-row-detail-name">Expected Profit Name:</div>
+                                                                        <div class="footable-row-detail-value">500.00</div>
+                                                                    </div>
+                                                                    <div class="footable-row-detail-row">
+                                                                        <div class="footable-row-detail-name">P/L</div>
+                                                                        <div class="footable-row-detail-value">500.00</div>
+                                                                    </div>
+                                                                    <div class="footable-row-detail-row">
+                                                                        <div class="footable-row-detail-name">Time Till Expiration</div>
+                                                                        <div class="footable-row-detail-value">12:48:54</div>
+                                                                    </div>
+                                                                    <div class="footable-row-detail-row">
+                                                                        <div class="footable-row-detail-name"><a class="btn btn-blue track_btn">TRACK</a></div>
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr class="footable-row-detail success">
+                                                            <td class="footable-row-detail-cell" colspan="11">
+                                                                <div class="footable-row-detail-inner">
+                                                                    <div class="footable-row-detail-row">
+                                                                        <div class="footable-row-detail-name">Contract Name:</div>
+                                                                        <div class="footable-row-detail-value">AAPL159897</div>
+                                                                    </div>
+                                                                    <div class="footable-row-detail-row">
+                                                                        <div class="footable-row-detail-name">Bid</div>
+                                                                        <div class="footable-row-detail-value">0.00</div>
+                                                                    </div>
+                                                                    <div class="footable-row-detail-row">
+                                                                        <div class="footable-row-detail-name">Ask</div>
+                                                                        <div class="footable-row-detail-value">0.00</div>
+                                                                    </div>
+                                                                    <div class="footable-row-detail-row">
+                                                                        <div class="footable-row-detail-name">% Expire OTM</div>
+                                                                        <div class="footable-row-detail-value">0.00%</div>
+                                                                    </div>
+                                                                    <div class="footable-row-detail-row">
+                                                                        <div class="footable-row-detail-name">Expected Profit Name:</div>
+                                                                        <div class="footable-row-detail-value">500.00</div>
+                                                                    </div>
+                                                                    <div class="footable-row-detail-row">
+                                                                        <div class="footable-row-detail-name">P/L</div>
+                                                                        <div class="footable-row-detail-value">500.00</div>
+                                                                    </div>
+                                                                    <div class="footable-row-detail-row">
+                                                                        <div class="footable-row-detail-name">Time Till Expiration</div>
+                                                                        <div class="footable-row-detail-value">12:48:54</div>
+                                                                    </div>
+                                                                    <div class="footable-row-detail-row">
+                                                                        <div class="footable-row-detail-name"><a class="btn btn-blue track_btn">TRACK</a></div>
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+
+                                                    </tbody>
+                                                </table>
+                                            </td>
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div  id="optionChainContent" class="toggleContent">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="ibox float-e-margins">
+                                    <div class="ibox-content custom-2 text-center" style="min-height:170px">
+                                        <div class="col-lg-4 row number-row">
+                                            <h2>Color Depth</h2>
+                                            <div class="col-lg-10">
+                                                <div id="basic_slider"></div>
+                                            </div>
+                                            <div class="col-lg-2">
+                                                <span class="badge badge-success" id="basic_slider_count">20%</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4  row number-row">
+                                            <h2 >Volatility</h2>
+                                            <div class="col-lg-10">
+                                                <div id="advance_slider"></div>
+                                            </div>
+                                            <div class="col-lg-2">
+                                                <span class="badge badge-success" id="slider_count">20%</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4  row number-row-35">
+                                            <div class="col-lg-12">
+                                                <form role="form" class="form-horizontal">
+                                                    <div class="form-group">
+                                                        <label for="email3" class="control-label col-sm-9 left-float">Number of Contracts to show:</label>
+                                                        <div class="col-sm-3">
+                                                            <select class="form-control">
+                                                                <option>1</option>
+                                                                <option>2</option>
+                                                                <option>3</option>
+                                                                <option>4</option>
+                                                                <option>5</option>
+                                                                <option>6</option>
+                                                                <option>7</option>
+                                                                <option>8</option>
+                                                                <option>9</option>
+                                                                <option>10</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="pwd3" class="control-label col-sm-4 left-float">Exp:</label>
+                                                        <div class="col-sm-6 right-float">          
+                                                            <input type="text" id="date_1" class="form-control  right-float" value="12/22/2015"/>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6 col-xs-6 codekast-heading">Calls</div>
+                            <div class="col-lg-6 col-xs-6 codekast-heading">Puts</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="ibox float-e-margins codekast">
+                                    <table class="footable table table-stripped toggle-arrow-tiny codekast" data-page-size="8" id="tableBottom">
+                                        <thead class="codekast">
+                                            <tr>
+
+                                                <th data-toggle="true">Last</th>
+                                                <th>Change</th>
+                                                <th>%Change</th>
+                                                <th>Volume</th>
+                                                <th>Strike</th>
+                                                <th>Last</th>
+                                                <th>Change</th>
+                                                <th>%Change</th>
+                                                <th>Volume</th>
+                                                <th data-hide="all">Contact Name</th>
+                                                <th data-hide="all">Bid</th>
+                                                <th data-hide="all">Ask</th>
+                                                <th data-hide="all">%Expire OTM</th>
+                                                <th data-hide="all">Expire Profit</th>
+                                                <th data-hide="all">Contact Name</th>
+                                                <th data-hide="all">Bid</th>
+                                                <th data-hide="all">Ask</th>
+                                                <th data-hide="all">%Expire OTM</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="codekast">
+                                            <tr>
+                                                <td>127.70</td>
+                                                <td>0.00</td>
+                                                <td>0.00</td>
+                                                <td>1</td>
+                                                <td>485.00</td>
+                                                <td>1.60</td>
+                                                <td>0.00</td>
+                                                <td>0.00%</td>
+                                                <td>1</td>
+                                                <td>AAPL159897</td>
+                                                <td>0.00</td>
+                                                <td>0.00</td>
+                                                <td>0.00%</td>
+                                                <td>500.00</td>
+                                                <td>AAPL159897</td>
+                                                <td>0.00</td>
+                                                <td>0.00</td>
+                                                <td>25.00%</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="success">127.70</td>
+                                                <td class="success">0.00</td>
+                                                <td class="success">0.00</td>
+                                                <td class="success">1</td>
+                                                <td class="success">485.00</td>
+                                                <td>1.60</td>
+                                                <td>0.00</td>
+                                                <td>0.00%</td>
+                                                <td>1</td>
+                                                <td>AAPL159897</td>
+                                                <td>0.00</td>
+                                                <td>0.00</td>
+                                                <td>0.00%</td>
+                                                <td>500.00</td>
+                                                <td>AAPL159897</td>
+                                                <td>0.00</td>
+                                                <td>0.00</td>
+                                                <td>25.00%</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="success">127.70</td>
+                                                <td class="success">0.00</td>
+                                                <td class="success">0.00</td>
+                                                <td class="success">1</td>
+                                                <td class="success">485.00</td>
+                                                <td>1.60</td>
+                                                <td>0.00</td>
+                                                <td>0.00%</td>
+                                                <td>1</td>
+                                                <td>AAPL159897</td>
+                                                <td>0.00</td>
+                                                <td>0.00</td>
+                                                <td>0.00%</td>
+                                                <td>500.00</td>
+                                                <td>AAPL159897</td>
+                                                <td>0.00</td>
+                                                <td>0.00</td>
+                                                <td>25.00%</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="success">127.70</td>
+                                                <td class="success">0.00</td>
+                                                <td class="success">0.00</td>
+                                                <td class="success">1</td>
+                                                <td class="success">485.00</td>
+                                                <td>1.60</td>
+                                                <td>0.00</td>
+                                                <td>0.00%</td>
+                                                <td>1</td>
+                                                <td>AAPL159897</td>
+                                                <td>0.00</td>
+                                                <td>0.00</td>
+                                                <td>0.00%</td>
+                                                <td>500.00</td>
+                                                <td>AAPL159897</td>
+                                                <td>0.00</td>
+                                                <td>0.00</td>
+                                                <td>25.00%</td>
+                                            </tr>
+                                            <tr>
+                                                <td>127.70</td>
+                                                <td>0.00</td>
+                                                <td>0.00</td>
+                                                <td>1</td>
+                                                <td>485.00</td>
+                                                <td>1.60</td>
+                                                <td>0.00</td>
+                                                <td>0.00%</td>
+                                                <td>1</td>
+                                                <td>AAPL159897</td>
+                                                <td>0.00</td>
+                                                <td>0.00</td>
+                                                <td>0.00%</td>
+                                                <td>500.00</td>
+                                                <td>AAPL159897</td>
+                                                <td>0.00</td>
+                                                <td>0.00</td>
+                                                <td>25.00%</td>
+                                            </tr>
+                                            <tr>
+                                                <td>127.70</td>
+                                                <td>0.00</td>
+                                                <td>0.00</td>
+                                                <td>1</td>
+                                                <td>485.00</td>
+                                                <td class="danger">1.60</td>
+                                                <td class="danger">0.00</td>
+                                                <td class="danger">0.00%</td>
+                                                <td class="danger">1</td>
+                                                <td>AAPL159897</td>
+                                                <td>0.00</td>
+                                                <td>0.00</td>
+                                                <td>0.00%</td>
+                                                <td>500.00</td>
+                                                <td>AAPL159897</td>
+                                                <td>0.00</td>
+                                                <td>0.00</td>
+                                                <td>25.00%</td>
+                                            </tr>
+                                            <tr>
+                                                <td>127.70</td>
+                                                <td>0.00</td>
+                                                <td>0.00</td>
+                                                <td>1</td>
+                                                <td>485.00</td>
+                                                <td class="danger">1.60</td>
+                                                <td class="danger">0.00</td>
+                                                <td class="danger">0.00%</td>
+                                                <td class="danger">1</td>
+                                                <td>AAPL159897</td>
+                                                <td>0.00</td>
+                                                <td>0.00</td>
+                                                <td>0.00%</td>
+                                                <td>500.00</td>
+                                                <td>AAPL159897</td>
+                                                <td>0.00</td>
+                                                <td>0.00</td>
+                                                <td>25.00%</td>
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+
+
+
+        <!-- Page-Level Scripts -->
+        <script>
+            $(document).ready(function () {
+
+                $('.tabBtn').click(function () {
+                    $('.tabBtn').removeClass('btn-blue').addClass('btn-white');
+                    $(this).removeClass('btn-white').addClass('btn-blue');
+					
+					var thisId = $(this).attr('id');
+					$('.toggleContent').fadeOut();
+					$("#"+thisId+'Content').fadeIn();
+                });
+
+                $('.three-rows-clickable').click(function () {
+                    $(this).next().slideToggle('slow');
+                });
+                $('#tableBottom').footable();
+                $('#date_1').datepicker({});
+                $("#basic_slider, .basic_slider_row, #advance_slider, #risk_slider").noUiSlider({
+                    start: 40,
+                    behaviour: 'tap',
+                    connect: 'upper',
+                    range: {
+                        'min': 0,
+                        'max': 100
+                    }
+                });
+				
+				$('#risk_slider').on('change', function(){
+					$('.risk_count').text($(this).val()+'%');
+				});
+				
+				$('#advance_slider').on('change', function(){
+					$('#slider_count').text($(this).val()+'%');
+				});
+				
+				$('#advance_slider').on('change', function(){
+					$('#slider_count').text($(this).val()+'%');
+				});
+				
+				$('.basic_slider_row').on('click', function(e){
+					e.stopPropagation();
+				});
+				
+				$('.basic_slider_row').on('change', function(e){
+					e.stopPropagation();
+					$(this).parent().next().find('.row_count').text($(this).val()+'%');
+				});
+				
+				$('.track_btn').click(function(){
+					$(this).closest('.footable-row-detail-cell').css('background', '#dff0d8');
+				});
+            });
+
+        </script>
+
+    </body>
+</html>

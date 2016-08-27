@@ -1,0 +1,96 @@
+<!--
+Author: W3layouts
+Author URL: http://w3layouts.com
+License: Creative Commons Attribution 3.0 Unported
+License URL: http://creativecommons.org/licenses/by/3.0/
+-->
+<!DOCTYPE html>
+<html>
+<head>
+<title>Login | Crowdkast</title>
+<meta charset="utf-8">
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<link href="{{url_for("authentication.static",filename="css/style.css")}}" rel='stylesheet' type='text/css' />
+<link href="{{url_for("authentication.static",filename="css/bootstrap.min.css")}}" rel='stylesheet' type='text/css' />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+<!--webfonts-->
+<link href='//fonts.googleapis.com/css?family=Oxygen:400,300,700' rel='stylesheet' type='text/css'>
+
+<style>
+	#member{
+margin: 18px 43px;
+	margin-top: 0px;
+  margin-bottom: 0px;	
+  color: white;
+}
+#forgot-password{
+margin: 18px 43px;
+	margin-top: 25px;
+  margin-bottom: 0px;	
+  color: white;
+}
+</style>
+<!--//webfonts-->
+</head>
+<body>
+<div class="main">
+	<div class="social-icons">
+		 <div class="col_1_of_f span_1_of_f">
+		 <a href="{{url_for('authentication.AuthenticationView:facebooklogin')}}">
+		    <ul class='facebook'>
+		    	<i class="fb"> </i>
+		    	<li>Login with Facebook</li>
+		    	<div class='clear'> </div>
+		    </ul>
+		    </a>
+		 </div>	
+		 <div class="col_1_of_f span_1_of_f">
+		 <a href="{{url_for('authentication.AuthenticationView:twitterlogin')}}">
+		    <ul class='twitter'>
+		      <i class="tw"> </i>
+		      <li>Login with Twitter</li>
+		      <div class='clear'> </div>
+		    </ul>
+		    </a>
+		</div>
+		<div class="clear"> </div>	
+      </div>
+      <h2>Or Login with</h2>
+		
+		   <div class="lable-2">
+		   		<form class="form" action="{{url_for('authentication.AuthenticationView:signin')}}" method="POST" role="form">
+				{{ signinpage_form.hidden_tag() }}
+				{{signinpage_form.username(type="text", class="text", value="username ", onfocus="this.value = '';", onblur="if (this.value == '') {this.value = 'username ';}")}} 
+									<p class="help-block">{{ signinpage_form.username.errors[0] }}</p>
+
+				{{ signinpage_form.password(type="password", class="text", placeholder="Password ", onfocus="this.placeholder = '';" ,onblur="if (this.placeholder == '') {this.placeholder = 'Password ';}") }}
+				<p class="help-block">{{ signinpage_form.password.errors[0] }}</p>
+
+		        <div class="submit">
+			  <input type="submit" value="Login" >
+		   </div>
+		        </form>
+		   </div>
+		   
+		   
+		   <div class="clear"> </div>
+		
+		<div class="row" id="forgot-password" align="center">
+		forgot your password? <a href="{{ url_for('authentication.AuthenticationView:forgot_password') }}" id="join">Click Here</a>
+		<!-----//end-main---->
+		</div>
+		<div class="row" id="member" align="center">
+		Not a Member <a href="{{ url_for('authentication.AuthenticationView:signup') }}" id="join" data-type="text" data-url="">Sign up</a>
+		<!-----//end-main---->
+		</div>
+		<!-----//end-main---->
+		</div>
+		 <!-----start-copyright---->
+   		<div class="copy-right">
+			<p> &copy; 2014 Crowdkast.co. All rights reserved.</p>
+
+		</div>
+				<!-----//end-copyright---->
+</body>
+</html>
