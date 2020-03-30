@@ -1,6 +1,6 @@
 import requests
 from BeautifulSoup import BeautifulSoup
-from selenium immport webdriver
+from selenium import webdriver
 import pandas as pd
 from text_unidecode import unidecode
 import random, time
